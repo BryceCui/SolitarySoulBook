@@ -67,6 +67,8 @@ public class RetrofitHelper implements HttpEngine {
     public RetrofitHelper(int check) {
         switch (check) {
             case 0:
+                BASE_URL = BaseUrl.baseUrl;
+
                 break;
             default:
                 BASE_URL = BaseUrl.baseUrl;
@@ -77,6 +79,10 @@ public class RetrofitHelper implements HttpEngine {
 
     public static RetrofitHelper build() {
         if (mHelper == null) return mHelper = new RetrofitHelper();
+        return mHelper;
+    }
+    public static RetrofitHelper build(int index) {
+        if (mHelper == null) return mHelper = new RetrofitHelper(index);
         return mHelper;
     }
 

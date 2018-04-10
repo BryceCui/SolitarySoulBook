@@ -28,7 +28,7 @@ import com.squareup.leakcanary.RefWatcher;
 public abstract class BaseCustomDialog extends DialogFragment {
     public static final String TAG = "BaseCustomDialog";
     private View view;
-
+    private static final float DEFAULT_DIMAMOUNT = 0.2F;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -81,11 +81,14 @@ public abstract class BaseCustomDialog extends DialogFragment {
             layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
             //位置
+            layoutParams.dimAmount=getDimAmount();
             layoutParams.gravity = getGravity();
             window.setAttributes(layoutParams);
         }
     }
-
+    public float getDimAmount() {
+        return DEFAULT_DIMAMOUNT;
+    }
     //默认弹窗位置为中心
     public int getGravity() {
         return Gravity.CENTER;

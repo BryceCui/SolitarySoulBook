@@ -9,6 +9,14 @@ import com.cuipengyu.solitarysoulbook.base.BaseActivity;
 import com.cuipengyu.solitarysoulbook.model.bean.MixTocBeanCon;
 import com.cuipengyu.solitarysoulbook.model.httphelper.HttpEngine;
 import com.cuipengyu.solitarysoulbook.model.httphelper.RetrofitHelper;
+import com.cuipengyu.solitarysoulbook.utils.LogUtils;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 public class MainActivity extends BaseActivity {
     @Override
@@ -18,7 +26,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document document = Jsoup.connect("http://www.zhuishushenqi.com/").get();
+                    Elements elements = document.select("div.recommend").select("div.books-list");
+                    Elements links = elements.select("a[href]");
+                    LogUtils.e(links.select("a").attr("href")+"");
+                    Log.e("links",links.get(0).select("a").attr("href")+"");
+                    Log.e("links",links.get(1).select("a").attr("href")+"");
+                    Log.e("links",links.get(2).select("a").attr("href")+"");
+                    Log.e("links",links.get(3).select("a").attr("href")+"");
+                    Log.e("links",links.size()+"");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 

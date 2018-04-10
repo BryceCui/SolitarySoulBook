@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.controller;
+package com.cuipengyu.solitarysoulbook.model.bean;
 
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -13,8 +13,6 @@ import com.cuipengyu.solitarysoulbook.base.OnViewClickListener;
 
 //dialog默认的控制信息
 public class CustomDialogController implements Parcelable {
-    private OnViewClickListener onViewClickListener;
-    private OnBindViewListener onBindViewListener;
     public static final Creator<CustomDialogController> CREATOR = new Creator<CustomDialogController>() {
         @Override
         public CustomDialogController createFromParcel(Parcel in) {
@@ -26,6 +24,8 @@ public class CustomDialogController implements Parcelable {
             return new CustomDialogController[size];
         }
     };
+    private OnViewClickListener onViewClickListener;
+    private OnBindViewListener onBindViewListener;
     private DialogInterface.OnDismissListener onDismissListener;
     private FragmentManager fragmentManager;
     private View dialogView;
@@ -37,6 +37,8 @@ public class CustomDialogController implements Parcelable {
     private int[] ids;
     private int orientation;
     private boolean cancelable;//弹窗是否可以取消
+    //透明度
+    private float dimAmount;
 
     public CustomDialogController() {
     }
@@ -48,17 +50,21 @@ public class CustomDialogController implements Parcelable {
         ids = in.createIntArray();
         orientation = in.readInt();
         cancelable = in.readByte() != 0;
+        dimAmount = in.readFloat();
     }
 
     public DialogInterface.OnDismissListener getOnDismissListener() {
         return onDismissListener;
     }
+
     public OnBindViewListener getOnBindViewListener() {
         return onBindViewListener;
     }
+
     public OnViewClickListener getOnViewClickListener() {
         return onViewClickListener;
     }
+
     public FragmentManager getFragmentManager() {
         return fragmentManager;
     }
@@ -99,6 +105,7 @@ public class CustomDialogController implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeFloat(dimAmount);
         dest.writeInt(layoutRes);
         dest.writeInt(gravity);
         dest.writeString(tag);
@@ -108,18 +115,24 @@ public class CustomDialogController implements Parcelable {
 
     }
 
+    public float getDimAmount() {
+        return dimAmount;
+    }
+
     public static class ControllerParams {
         public FragmentManager mFragmentManager;
         public int mLayoutRes;
         public int mGravity = Gravity.CENTER;
         public String mTag = "TDialog";
         public int[] ids;
+        public float mDimAmount = 0.2f;
         public int orientation = LinearLayoutManager.VERTICAL;//默认RecyclerView的列表方向为垂直方向
         public boolean mCancelable = true;//弹窗是否可以取消
         public View mDialogView;//直接使用传入进来的View,而不需要通过解析Xml
         public DialogInterface.OnDismissListener mOnDismissListener;
         public OnViewClickListener mOnViewClickListener;
         public OnBindViewListener bindViewListener;
+
         public void apply(CustomDialogController tController) {
             tController.fragmentManager = mFragmentManager;
             if (mLayoutRes > 0) {
@@ -128,6 +141,7 @@ public class CustomDialogController implements Parcelable {
             if (mDialogView != null) {
                 tController.dialogView = mDialogView;
             }
+            tController.dimAmount = mDimAmount;
             tController.gravity = mGravity;
             tController.tag = mTag;
             if (ids != null) {
