@@ -12,7 +12,7 @@ import android.view.View;
 import com.cuipengyu.solitarysoulbook.base.BaseCustomDialog;
 import com.cuipengyu.solitarysoulbook.base.OnBindViewListener;
 import com.cuipengyu.solitarysoulbook.base.OnViewClickListener;
-import com.cuipengyu.solitarysoulbook.controller.CustomDialogController;
+import com.cuipengyu.solitarysoulbook.model.bean.CustomDialogController;
 
 /**
  * Create by    ： 崔鹏宇
@@ -66,30 +66,23 @@ public class CustomDialog extends BaseCustomDialog {
     }
 
     @Override
-    public int getGravity() {
-        return mController.getGravity();
+    public float getDimAmount() {
+        return mController.getDimAmount();
     }
 
-
-    public <T extends View> T getView(@IdRes int viewId) {
-        View view = views.get(viewId);
-        if (view == null) {
-            view = bindView.findViewById(viewId);
-            views.put(viewId, view);
-        }
-        return (T) view;
+    @Override
+    public int getGravity() {
+        return mController.getGravity();
     }
 
     public OnViewClickListener getOnViewClickListener() {
         return mController.getOnViewClickListener();
     }
 
-
     @Override
     public boolean isCancelable() {
         return mController.isCancelable();
     }
-
 
     //恢复
     @Override
@@ -146,6 +139,7 @@ public class CustomDialog extends BaseCustomDialog {
             params.mGravity = gravity;
             return this;
         }
+
         public Builder setCancelable(boolean cancelable) {
             params.mCancelable = cancelable;
             return this;
@@ -174,6 +168,11 @@ public class CustomDialog extends BaseCustomDialog {
 
         public Builder setOnViewClickListener(OnViewClickListener listener) {
             params.mOnViewClickListener = listener;
+            return this;
+        }
+
+        public Builder setDimount(float dimount) {
+            params.mDimAmount = dimount;
             return this;
         }
 
