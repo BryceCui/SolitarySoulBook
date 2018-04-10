@@ -45,4 +45,6 @@ dependencies {
     //内存检测工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //解析html数据工具
+    implementation 'org.jsoup:jsoup:1.11.2'
 }
