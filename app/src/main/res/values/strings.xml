@@ -2,5 +2,8 @@
     <string name="app_name">SolitarySoulBook</string>
 
     <!--Dialog-->
-    <string name="base_activity_probar_text">正在加载中,请稍后!</string>
+    <string name="base_activity_progressbar_tv">正在加载中,请稍后!</string>
+    <string name="dialog_bottom_photo_tv">拍照</string>
+    <string name="dialog_bottom_photo_check_tv">相册</string>
+    <string name="dialog_bottom_photo_cancel_tv">取消</string>
 </resources>
