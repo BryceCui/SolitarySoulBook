@@ -45,7 +45,7 @@ public class RetrofitHelper implements HttpEngine {
     private String BASE_URL = "";
 
     private RetrofitHelper() {
-        BASE_URL = BaseUrl.baseUrl;
+        BASE_URL = BaseUrl.Api_baseUrl;
         init();
     }
 
@@ -67,11 +67,11 @@ public class RetrofitHelper implements HttpEngine {
     public RetrofitHelper(int check) {
         switch (check) {
             case 0:
-                BASE_URL = BaseUrl.baseUrl;
+                BASE_URL = BaseUrl.http_baseUrl;
 
                 break;
             default:
-                BASE_URL = BaseUrl.baseUrl;
+                BASE_URL = BaseUrl.Api_baseUrl;
                 break;
         }
         init();
