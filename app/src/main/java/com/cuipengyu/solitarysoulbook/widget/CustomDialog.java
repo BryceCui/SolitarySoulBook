@@ -3,7 +3,6 @@ package com.cuipengyu.solitarysoulbook.widget;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.util.Log;
 import android.util.SparseArray;
@@ -13,6 +12,8 @@ import com.cuipengyu.solitarysoulbook.base.BaseCustomDialog;
 import com.cuipengyu.solitarysoulbook.base.OnBindViewListener;
 import com.cuipengyu.solitarysoulbook.base.OnViewClickListener;
 import com.cuipengyu.solitarysoulbook.model.bean.CustomDialogController;
+import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Create by    ： 崔鹏宇
@@ -24,8 +25,8 @@ import com.cuipengyu.solitarysoulbook.model.bean.CustomDialogController;
 public class CustomDialog extends BaseCustomDialog {
     private static final String KEY_TCONTROLLER = "CustomDialogController";
     protected CustomDialogController mController;
-    private View bindView;
-    private SparseArray<View> views;
+    private View bindView = null;
+    private SparseArray<View> views = null;
 
     public CustomDialog() {
         mController = new CustomDialogController();
@@ -59,10 +60,12 @@ public class CustomDialog extends BaseCustomDialog {
 
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        mController = null;
+        RefWatcher refWatcher = ApplicationContextUtil.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     @Override
@@ -118,6 +121,7 @@ public class CustomDialog extends BaseCustomDialog {
     public static class Builder {
 
         CustomDialogController.ControllerParams params;
+        CustomDialog dialog;
 
         public Builder(FragmentManager fragmentManager) {
             params = new CustomDialogController.ControllerParams();
@@ -177,9 +181,11 @@ public class CustomDialog extends BaseCustomDialog {
         }
 
         public CustomDialog create() {
-            CustomDialog dialog = new CustomDialog();
-            params.apply(dialog.mController);
-            Log.e(TAG, "create");
+            if (dialog == null) {
+                dialog = new CustomDialog();
+                params.apply(dialog.mController);
+                Log.e(TAG, "create");
+            }
             //将数据从Buidler的DjParams中传递到DjDialog中
             return dialog;
         }
