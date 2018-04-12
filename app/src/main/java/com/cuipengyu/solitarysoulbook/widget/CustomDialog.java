@@ -11,7 +11,7 @@ import android.view.View;
 import com.cuipengyu.solitarysoulbook.base.BaseCustomDialog;
 import com.cuipengyu.solitarysoulbook.base.OnBindViewListener;
 import com.cuipengyu.solitarysoulbook.base.OnViewClickListener;
-import com.cuipengyu.solitarysoulbook.model.bean.CustomDialogController;
+import com.cuipengyu.solitarysoulbook.entity.bean.CustomDialogController;
 import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
 import com.squareup.leakcanary.RefWatcher;
 

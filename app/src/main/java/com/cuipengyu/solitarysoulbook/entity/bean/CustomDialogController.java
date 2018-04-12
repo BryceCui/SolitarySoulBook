@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.model.bean;
+package com.cuipengyu.solitarysoulbook.entity.bean;
 
 import android.app.FragmentManager;
 import android.content.DialogInterface;

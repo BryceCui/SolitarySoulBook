@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook;
+package com.cuipengyu.solitarysoulbook.entity.bean;
 
 import com.cuipengyu.solitarysoulbook.base.BaseBean;
 

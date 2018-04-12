@@ -1,8 +1,8 @@
-package com.cuipengyu.solitarysoulbook.model.httphelper;
+package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 import com.alibaba.fastjson.JSON;
 import com.cuipengyu.solitarysoulbook.base.BaseBean;
-import com.cuipengyu.solitarysoulbook.base.BaseUrl;
+import com.cuipengyu.solitarysoulbook.base.Constants;
 import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class RetrofitHelper implements HttpEngine {
     private String BASE_URL = "";
 
     private RetrofitHelper() {
-        BASE_URL = BaseUrl.Api_baseUrl;
+        BASE_URL = Constants.Api_baseUrl;
         init();
     }
 
@@ -67,11 +67,11 @@ public class RetrofitHelper implements HttpEngine {
     public RetrofitHelper(int check) {
         switch (check) {
             case 0:
-                BASE_URL = BaseUrl.http_baseUrl;
+                BASE_URL = Constants.http_baseUrl;
 
                 break;
             default:
-                BASE_URL = BaseUrl.Api_baseUrl;
+                BASE_URL = Constants.Api_baseUrl;
                 break;
         }
         init();

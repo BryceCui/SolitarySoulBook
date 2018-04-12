@@ -1,7 +1,7 @@
-package com.cuipengyu.solitarysoulbook.model.httphelper;
+package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 
-import com.cuipengyu.solitarysoulbook.model.bean.MixTocBeanCon;
+import com.cuipengyu.solitarysoulbook.entity.bean.MixTocBeanCon;
 
 import java.util.Map;
 
