@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.model.httphelper;
+package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 import com.cuipengyu.solitarysoulbook.base.BaseBean;
 

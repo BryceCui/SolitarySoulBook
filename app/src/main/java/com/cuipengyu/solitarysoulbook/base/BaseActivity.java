@@ -2,6 +2,10 @@ package com.cuipengyu.solitarysoulbook.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 
 import com.cuipengyu.solitarysoulbook.R;
@@ -42,5 +46,12 @@ public abstract class BaseActivity extends Activity {
     public void LoadingDismiss() {
         if (dialog != null) dialog.dismiss();
         dialog = null;
+    }
+
+    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull@IdRes int fragmentId) {
+        if (baseFragment != null) {
+            getFragmentManager().beginTransaction().replace(fragmentId, baseFragment, baseFragment.getClass().getSimpleName()).addToBackStack(baseFragment.getClass().getSimpleName()).commitAllowingStateLoss();
+        }
+
     }
 }

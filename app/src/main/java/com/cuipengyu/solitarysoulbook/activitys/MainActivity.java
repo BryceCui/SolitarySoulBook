@@ -4,10 +4,10 @@ package com.cuipengyu.solitarysoulbook.activitys;
 import android.view.View;
 
 import com.cuipengyu.solitarysoulbook.R;
-import com.cuipengyu.solitarysoulbook.SelectBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.SelectBean;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
-import com.cuipengyu.solitarysoulbook.model.httphelper.JsoupEngine;
-import com.cuipengyu.solitarysoulbook.model.httphelper.JsoupHelper;
+import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupEngine;
+import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupHelper;
 import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
 import com.squareup.leakcanary.RefWatcher;
 
