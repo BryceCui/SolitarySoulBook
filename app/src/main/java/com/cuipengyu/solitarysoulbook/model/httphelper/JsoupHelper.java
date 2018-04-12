@@ -1,14 +1,15 @@
 package com.cuipengyu.solitarysoulbook.model.httphelper;
 
-import android.util.Log;
-
+import com.cuipengyu.solitarysoulbook.SelectBean;
 import com.cuipengyu.solitarysoulbook.base.BaseBean;
 import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -25,27 +26,38 @@ import io.reactivex.schedulers.Schedulers;
  * Instructions ：
  */
 public class JsoupHelper implements JsoupEngine {
+    private static JsoupHelper helper;
+
+    public static JsoupHelper getHelper() {
+        if (helper == null) return new JsoupHelper();
+        return helper;
+    }
+
     @Override
-    public <T extends BaseBean> void getHtmlStringData(final Class<T> bean, final String select, final int index, final CallBack<T> callBack) {
+    public <T extends BaseBean> void getHtmlStringData(final String select, final int index, final CallBack<T> callBack) {
         Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
                 // TODO: 2018/4/11  添加switch进行选择判断
+                SelectBean selectBean = new SelectBean();
+                List<SelectBean.SelectBook> selectBook = new ArrayList<>();
                 Document document = Jsoup.connect("http://www.zhuishushenqi.com/selection/" + select + "?page=" + index).get();
                 Elements elements = document.select("div.books-list");
                 Elements links = elements.select("a");
-                for (Element element : links) {
-                    String src = element.select("img").attr("src");
-                    String id = element.select("a").attr("href");
-                    String name = element.select("div.right").select("h4.name").first().text();
-                    String name1 = element.select("div.right").select("p.desc").first().text();
-                    String name2 = element.select("div.right").select("p.popularity").text();
-                    Log.e("recommend--src-", src);
-                    Log.e("recommend--id-", id);
-                    Log.e("recommend--name-", name);
-                    Log.e("recommend--name1-", name1);
-                    Log.e("recommend--name2-", name2);
+                for (int i = 0; i < links.size(); i++) {
+                    String src = links.select("img").attr("src");
+                    String id = links.select("a").attr("href");
+                    String name = links.select("div.right").select("h4.name").first().text();
+                    String name1 = links.select("div.right").select("p.desc").first().text();
+                    String name2 = links.select("div.right").select("p.popularity").text();
+                    SelectBean.SelectBook selectBook1 = new SelectBean.SelectBook();
+                    selectBook1.setBook_Id(id);
+                    selectBook.add(selectBook1);
                 }
+                selectBean.setSelectBooks_List(selectBook);
+                LogUtils.e(selectBean.getSelectBooks_List().size() + "");
+                emitter.onNext((T) selectBean);
+
             }
         }).subscribeOn(Schedulers.io()).subscribe(new Observer<T>() {
             @Override
@@ -55,7 +67,7 @@ public class JsoupHelper implements JsoupEngine {
 
             @Override
             public void onNext(T element) {
-
+                callBack.onSucces(element);
             }
 
             @Override

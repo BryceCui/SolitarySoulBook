@@ -10,7 +10,7 @@ import com.cuipengyu.solitarysoulbook.base.BaseBean;
  * Instructions ：
  */
 public interface JsoupEngine {
-    <T extends BaseBean> void getHtmlStringData(Class<T> bean,String select,int index, CallBack<T> callBack);
+    <T extends BaseBean> void getHtmlStringData(String select,int index, CallBack<T> callBack);
 
     interface CallBack<T extends BaseBean> {
         void onSucces(T t);
