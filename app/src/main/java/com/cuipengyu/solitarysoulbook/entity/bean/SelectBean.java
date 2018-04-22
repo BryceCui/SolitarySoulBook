@@ -1,7 +1,5 @@
 package com.cuipengyu.solitarysoulbook.entity.bean;
 
-import com.cuipengyu.solitarysoulbook.base.BaseBean;
-
 import java.util.ArrayList;
 import java.util.List;
 
