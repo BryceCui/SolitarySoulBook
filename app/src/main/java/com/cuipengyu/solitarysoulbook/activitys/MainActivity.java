@@ -4,6 +4,7 @@ package com.cuipengyu.solitarysoulbook.activitys;
 import android.view.View;
 
 import com.cuipengyu.solitarysoulbook.R;
+import com.cuipengyu.solitarysoulbook.base.DefaultObserver;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.bean.SelectBean;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
@@ -60,24 +61,19 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        RetrofitHelper.getService().getApi().getChapter("57206c3539a913ad65d35c7b").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ChapterLink>() {
+        RetrofitHelper.getService().getApi().getChapter("57206c3539a913ad65d35c7b").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new DefaultObserver<ChapterLink>() {
             @Override
-            public void onSubscribe(Disposable d) {
+            public void onSuccess(ChapterLink data) {
+                LogUtils.e(data.getMixToc().getChaptersUpdated());
+            }
+
+            @Override
+            public void onError(String error) {
 
             }
 
             @Override
-            public void onNext(ChapterLink chapterLink) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
+            public void onFinish() {
 
             }
         });
