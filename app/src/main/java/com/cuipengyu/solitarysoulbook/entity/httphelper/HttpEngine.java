@@ -1,6 +1,6 @@
 package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
-import com.cuipengyu.solitarysoulbook.base.BaseBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BaseBean;
 
 import java.util.Map;
 
