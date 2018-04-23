@@ -1,7 +1,7 @@
 package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 
-import com.cuipengyu.solitarysoulbook.entity.bean.MixTocBeanCon;
+import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 
 import java.util.Map;
 
@@ -18,12 +18,19 @@ import retrofit2.http.Url;
  * Created by cuipengyu on 2018/4/2
  */
 public interface RetrofitService {
+    @Deprecated
     @GET()
     Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> map);
 
+    @Deprecated
     @POST()
     Observable<ResponseBody> post(@Url String url, @QueryMap Map<String, String> map);
 
+    /**
+     * 获取小说章节
+     * @param path
+     * @return
+     */
     @GET("mix-atoc/{bookId}")
-    Observable<MixTocBeanCon> getChapter(@Path("bookId") String path);
+    Observable<ChapterLink> getChapter(@Path("bookId") String path);
 }

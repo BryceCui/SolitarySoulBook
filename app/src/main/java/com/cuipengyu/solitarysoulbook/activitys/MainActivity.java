@@ -4,12 +4,24 @@ package com.cuipengyu.solitarysoulbook.activitys;
 import android.view.View;
 
 import com.cuipengyu.solitarysoulbook.R;
+import com.cuipengyu.solitarysoulbook.base.DefaultObserver;
+import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.bean.SelectBean;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
+import com.cuipengyu.solitarysoulbook.entity.httphelper.HttpEngine;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupEngine;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupHelper;
+import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitBuilder;
+import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitHelper;
 import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
+import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 import com.squareup.leakcanary.RefWatcher;
+
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
     public void onClick(View view) {
@@ -18,7 +30,7 @@ public class MainActivity extends BaseActivity {
                 JsoupHelper.getHelper().getHtmlStringData("bzrt", 1, new JsoupEngine.CallBack<SelectBean>() {
                     @Override
                     public void onSucces(SelectBean baseBean) {
-
+                        LogUtils.e(baseBean.toString());
                     }
 
                     @Override
@@ -49,5 +61,21 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
 
+        RetrofitHelper.getService().getApi().getChapter("57206c3539a913ad65d35c7b").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new DefaultObserver<ChapterLink>() {
+            @Override
+            public void onSuccess(ChapterLink data) {
+                LogUtils.e(data.getMixToc().getChaptersUpdated());
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
     }
 }
