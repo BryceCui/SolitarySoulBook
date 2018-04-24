@@ -23,7 +23,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Time  is     ： 2018/4/9
  * Email        ： cuipengyusoul@gmail.com
  * Github       ： https://github.com/SolitarySoul
- * Instructions ：
+ * Instructions ： dialogfragment 基类
  */
 public abstract class BaseCustomDialog extends DialogFragment {
     public static final String TAG = "BaseCustomDialog";

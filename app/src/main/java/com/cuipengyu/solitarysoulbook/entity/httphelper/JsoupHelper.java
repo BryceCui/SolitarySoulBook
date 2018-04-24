@@ -1,6 +1,6 @@
 package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
-import com.cuipengyu.solitarysoulbook.base.Constants;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 import com.cuipengyu.solitarysoulbook.entity.bean.SelectBean;
 import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 

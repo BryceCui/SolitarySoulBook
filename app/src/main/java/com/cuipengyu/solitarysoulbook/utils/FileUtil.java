@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.cuipengyu.solitarysoulbook.entity.Constant;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -24,7 +24,7 @@ import java.io.OutputStreamWriter;
 public    class FileUtil   {
 
     public static String getChapterPath(String bookId, int chapter) {
-        return Constant.PATH_TXT + bookId + File.separator + chapter + ".txt";
+        return Constants.PATH_TXT + bookId + File.separator + chapter + ".txt";
     }
 
     /**

@@ -133,7 +133,6 @@ public class PageWidget extends BaseReadView{
         mBezierControl1.y = mCornerY;
         mBezierControl2.x = mCornerX;
         //mBezierControl2.y = mMiddleY - (mCornerX - mMiddleX) * (mCornerX - mMiddleX) / (mCornerY - mMiddleY);
-
         float f4 = mCornerY - mMiddleY;
         if (f4 == 0) {
             mBezierControl2.y = mMiddleY - (mCornerX - mMiddleX) * (mCornerX - mMiddleX) / 0.1f;
