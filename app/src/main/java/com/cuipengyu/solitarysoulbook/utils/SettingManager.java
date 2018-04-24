@@ -1,6 +1,6 @@
 package com.cuipengyu.solitarysoulbook.utils;
 
-import com.cuipengyu.solitarysoulbook.entity.Constant;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 
 /**
  * Create by    ： 崔鹏宇
@@ -87,7 +87,7 @@ public class SettingManager {
     }
 
     public int getReadTheme() {
-        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
+        if (SharedPreferencesUtil.getInstance().getBoolean(Constants.ISNIGHT, false)) {
             return ThemeManager.NIGHT;
         }
         return SharedPreferencesUtil.getInstance().getInt("readTheme", 3);

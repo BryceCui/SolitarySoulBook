@@ -2,7 +2,7 @@ package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 import com.alibaba.fastjson.JSON;
 import com.cuipengyu.solitarysoulbook.entity.bean.BaseBean;
-import com.cuipengyu.solitarysoulbook.base.Constants;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 
 import java.io.IOException;
