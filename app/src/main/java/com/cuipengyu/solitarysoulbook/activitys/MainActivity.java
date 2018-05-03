@@ -35,8 +35,13 @@ public class MainActivity extends BaseActivity {
 //                    }
 //                });
 //                LoadingShow();
-                Intent intent = new Intent(this, ReadActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this, ReadActivity.class);
+//                startActivity(intent);
+                //打开文件管理
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(intent, "Select a File to Upload"), 1);
                 break;
             case R.id.btn_disss:
                 LoadingDismiss();
