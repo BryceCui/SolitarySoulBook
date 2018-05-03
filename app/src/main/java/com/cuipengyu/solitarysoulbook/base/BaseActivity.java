@@ -18,11 +18,15 @@ public abstract class BaseActivity extends Activity {
     private final String TAG = getClass().getName();
     private CustomDialog dialog = null;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(bindViewLayout());
         initView();
+        initData();
     }
 
     @Override
@@ -34,6 +38,7 @@ public abstract class BaseActivity extends Activity {
     //绑定布局文件
     public abstract int bindViewLayout();
 
+    public abstract void initData();
     //初始化控件
     public abstract void initView();
 
@@ -48,7 +53,7 @@ public abstract class BaseActivity extends Activity {
         dialog = null;
     }
 
-    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull@IdRes int fragmentId) {
+    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull @IdRes int fragmentId) {
         if (baseFragment != null) {
             getFragmentManager().beginTransaction().replace(fragmentId, baseFragment, baseFragment.getClass().getSimpleName()).addToBackStack(baseFragment.getClass().getSimpleName()).commitAllowingStateLoss();
         }

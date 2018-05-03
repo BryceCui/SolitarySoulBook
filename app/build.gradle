@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Evenbus
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //fastjson 阿里json解析框架
     implementation 'com.alibaba:fastjson:1.2.47'
     //内存检测工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'

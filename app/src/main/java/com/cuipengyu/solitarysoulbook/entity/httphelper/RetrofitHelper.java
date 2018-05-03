@@ -1,6 +1,6 @@
 package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
-import com.cuipengyu.solitarysoulbook.base.Constants;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 
 /**
  * Create by    ： 崔鹏宇

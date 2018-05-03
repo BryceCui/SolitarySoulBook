@@ -28,9 +28,9 @@ public interface RetrofitService {
 
     /**
      * 获取小说章节
-     * @param path
+     * @param bookId
      * @return
      */
     @GET("mix-atoc/{bookId}")
-    Observable<ChapterLink> getChapter(@Path("bookId") String path);
+    Observable<ChapterLink> getChapterList(@Path("bookId") String bookId);
 }
