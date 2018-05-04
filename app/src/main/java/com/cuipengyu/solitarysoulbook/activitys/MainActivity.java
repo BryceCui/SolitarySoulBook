@@ -2,49 +2,19 @@ package com.cuipengyu.solitarysoulbook.activitys;
 
 
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cuipengyu.solitarysoulbook.R;
-import com.cuipengyu.solitarysoulbook.base.DefaultObserver;
-import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
-import com.cuipengyu.solitarysoulbook.entity.bean.SelectBean;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
-import com.cuipengyu.solitarysoulbook.entity.httphelper.HttpEngine;
-import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupEngine;
-import com.cuipengyu.solitarysoulbook.entity.httphelper.JsoupHelper;
-import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitBuilder;
-import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitHelper;
 import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
-import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 import com.squareup.leakcanary.RefWatcher;
 
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 public class MainActivity extends BaseActivity {
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_watch:
-                JsoupHelper.getHelper().getHtmlStringData("bzrt", 1, new JsoupEngine.CallBack<SelectBean>() {
-                    @Override
-                    public void onSucces(SelectBean baseBean) {
-                        LogUtils.e(baseBean.toString());
-                    }
-
-                    @Override
-                    public void onError(String error) {
-
-                    }
-                });
-//                LoadingShow();
-                break;
-            case R.id.btn_disss:
-                LoadingDismiss();
-                break;
-        }
-    }
+    FrameLayout main_fl;
+    TextView my_setting_tv, book_city_tv, bookshelf_tv;
+    ImageView bookshelf_iv, book_city_iv, my_setting_iv;
 
     @Override
     protected void onDestroy() {
@@ -60,22 +30,66 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        main_fl = findViewById(R.id.main_fl);
+        my_setting_tv = findViewById(R.id.my_setting_tv);
+        book_city_tv = findViewById(R.id.book_city_tv);
+        bookshelf_tv = findViewById(R.id.bookshelf_tv);
+        bookshelf_iv = findViewById(R.id.bookshelf_iv);
+        book_city_iv = findViewById(R.id.book_city_iv);
+        my_setting_iv = findViewById(R.id.my_setting_iv);
+    }
 
-        RetrofitHelper.getService().getApi().getChapter("57206c3539a913ad65d35c7b").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new DefaultObserver<ChapterLink>() {
-            @Override
-            public void onSuccess(ChapterLink data) {
-                LogUtils.e(data.getMixToc().getChaptersUpdated());
-            }
+    @Override
+    public void initData() {
 
-            @Override
-            public void onError(String error) {
+    }
 
-            }
+    public void main_onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bookshelf_rv:
+                setTabColor(0);
+                break;
+            case R.id.book_city_rv:
+                setTabColor(1);
+                break;
+            case R.id.my_setting_rv:
+                setTabColor(2);
+                break;
+        }
+    }
 
-            @Override
-            public void onFinish() {
+    /**
+     * 设置底部导航选中和未选中的状态
+     *
+     * @param index
+     */
+    public void setTabColor(int index) {
+        switch (index) {
+            case 0:
+                bookshelf_tv.setSelected(true);
+                bookshelf_iv.setSelected(true);
+                book_city_tv.setSelected(false);
+                book_city_iv.setSelected(false);
+                my_setting_tv.setSelected(false);
+                my_setting_iv.setSelected(false);
+                break;
+            case 1:
+                bookshelf_tv.setSelected(false);
+                bookshelf_iv.setSelected(false);
+                book_city_tv.setSelected(true);
+                book_city_iv.setSelected(true);
+                my_setting_tv.setSelected(false);
+                my_setting_iv.setSelected(false);
+                break;
+            case 2:
+                bookshelf_tv.setSelected(false);
+                bookshelf_iv.setSelected(false);
+                book_city_tv.setSelected(false);
+                book_city_iv.setSelected(false);
+                my_setting_tv.setSelected(true);
+                my_setting_iv.setSelected(true);
+                break;
 
-            }
-        });
+        }
     }
 }

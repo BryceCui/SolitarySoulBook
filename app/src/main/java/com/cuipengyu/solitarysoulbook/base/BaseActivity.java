@@ -18,11 +18,13 @@ public abstract class BaseActivity extends Activity {
     private final String TAG = getClass().getName();
     private CustomDialog dialog = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(bindViewLayout());
         initView();
+        initData();
     }
 
     @Override
@@ -37,6 +39,8 @@ public abstract class BaseActivity extends Activity {
     //初始化控件
     public abstract void initView();
 
+    public abstract void initData();
+
     //显示正在加载dialog
     public void LoadingShow() {
         dialog = new CustomDialog.Builder(getFragmentManager()).setLayoutRes(R.layout.dialog_baseloding_layout).setGravity(Gravity.CENTER).setCancelable(true).setDimount(0.1f).create().show();
@@ -48,7 +52,7 @@ public abstract class BaseActivity extends Activity {
         dialog = null;
     }
 
-    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull@IdRes int fragmentId) {
+    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull @IdRes int fragmentId) {
         if (baseFragment != null) {
             getFragmentManager().beginTransaction().replace(fragmentId, baseFragment, baseFragment.getClass().getSimpleName()).addToBackStack(baseFragment.getClass().getSimpleName()).commitAllowingStateLoss();
         }

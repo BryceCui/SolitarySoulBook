@@ -1,6 +1,14 @@
-package com.cuipengyu.solitarysoulbook.base;
+package com.cuipengyu.solitarysoulbook.entity;
+
+import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
+import com.cuipengyu.solitarysoulbook.utils.FileUtil;
 
 public class Constants {
+
+    //判断sd卡是否存在并且返回包名下文件路径
+    public static String PATH_DATA = FileUtil.createRootPath(ApplicationContextUtil.getAppConnect()) + "/cache";
+    public static String PATH_TXT = PATH_DATA + "/book/";
+    public static final String ISNIGHT = "isNight";
 
     /**
      * 精选模块

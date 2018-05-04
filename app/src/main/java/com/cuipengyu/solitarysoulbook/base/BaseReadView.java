@@ -25,7 +25,11 @@ import java.util.List;
  * Github       ： https://github.com/SolitarySoul
  * Instructions ：
  */
-public abstract   class BaseReadView extends View{
+public abstract class BaseReadView extends View {
+    //是否准备好
+    public boolean isPrepared = false;
+    //滑动装置
+    public Scroller mScroller;
     //屏幕
     protected int mScreenWidth;
     protected int mScreenHeight;
@@ -43,13 +47,11 @@ public abstract   class BaseReadView extends View{
     protected OnReadStateChangeListener listener;
     //书籍id
     protected String bookId;
-    //是否准备好
-    public boolean isPrepared = false;
-    //滑动装置
-    public  Scroller mScroller;
-
-    public BaseReadView(Context context, String bookId, List<ChapterLink.MixTocBean.ChaptersBean> chaptersList,
-                        OnReadStateChangeListener listener) {
+    private int dx, dy;
+    private long et = 0;
+    private boolean cancel = false;
+    private boolean center = false;
+    public BaseReadView(Context context, String bookId, List<ChapterLink.MixTocBean.ChaptersBean> chaptersList, OnReadStateChangeListener listener) {
         super(context);
         this.listener = listener;
         this.bookId = bookId;
@@ -61,10 +63,9 @@ public abstract   class BaseReadView extends View{
         mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.RGB_565);
         mCurrentPageCanvas = new Canvas(mCurPageBitmap);
         mNextPageCanvas = new Canvas(mNextPageBitmap);
-
         mScroller = new Scroller(getContext());
         //初始化工具类
-        pagefactory = new PageFactory( bookId, chaptersList);
+        pagefactory = new PageFactory(bookId, chaptersList);
         //设置监听
         pagefactory.setOnReadStateChangeListener(listener);
 
@@ -94,11 +95,6 @@ public abstract   class BaseReadView extends View{
         }
     }
 
-    private int dx, dy;
-    private long et = 0;
-    private boolean cancel = false;
-    private boolean center = false;
-
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
@@ -112,8 +108,7 @@ public abstract   class BaseReadView extends View{
                 actiondownY = dy;
                 touch_down = 0;
                 pagefactory.onDraw(mCurrentPageCanvas);
-                if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
-                        && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
+                if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3 && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     center = true;
                 } else {
                     center = false;
@@ -146,8 +141,7 @@ public abstract   class BaseReadView extends View{
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (center)
-                    break;
+                if (center) break;
                 int mx = (int) e.getX();
                 int my = (int) e.getY();
                 cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
@@ -212,36 +206,45 @@ public abstract   class BaseReadView extends View{
         drawCurrentBackArea(canvas);
     }
 
+    protected abstract void calcPoints();
+
+    protected abstract void drawCurrentPageArea(Canvas canvas);
+
     protected abstract void drawNextPageAreaAndShadow(Canvas canvas);
 
     protected abstract void drawCurrentPageShadow(Canvas canvas);
 
     protected abstract void drawCurrentBackArea(Canvas canvas);
 
-    protected abstract void drawCurrentPageArea(Canvas canvas);
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (pagefactory != null) {
+            pagefactory.recycle();
+        }
 
-    protected abstract void calcPoints();
+        if (mCurPageBitmap != null && !mCurPageBitmap.isRecycled()) {
+            mCurPageBitmap.recycle();
+            mCurPageBitmap = null;
+//            LogUtils.d("mCurPageBitmap recycle");
+        }
+
+        if (mNextPageBitmap != null && !mNextPageBitmap.isRecycled()) {
+            mNextPageBitmap.recycle();
+            mNextPageBitmap = null;
+//            LogUtils.d("mNextPageBitmap recycle");
+        }
+    }
 
     protected abstract void calcCornerXY(float x, float y);
-
-    /**
-     * 开启翻页
-     */
-    protected abstract void startAnimation();
 
     /**
      * 停止翻页动画（滑到一半调用停止的话  翻页效果会卡住 可调用#{restoreAnimation} 还原效果）
      */
     protected abstract void abortAnimation();
 
-    /**
-     * 还原翻页
-     */
-    protected abstract void restoreAnimation();
-
     protected abstract void setBitmaps(Bitmap mCurPageBitmap, Bitmap mNextPageBitmap);
 
-    public abstract void setTheme(int theme);
     /**
      * 复位触摸点位
      */
@@ -251,6 +254,18 @@ public abstract   class BaseReadView extends View{
         touch_down = 0;
         calcCornerXY(mTouch.x, mTouch.y);
     }
+
+    /**
+     * 开启翻页
+     */
+    protected abstract void startAnimation();
+
+    /**
+     * 还原翻页
+     */
+    protected abstract void restoreAnimation();
+
+    public abstract void setTheme(int theme);
 
     public void jumpToChapter(int chapter) {
         resetTouchPoint();
@@ -304,6 +319,14 @@ public abstract   class BaseReadView extends View{
             postInvalidate();
         }
     }
+//
+//    public void setBattery(int battery) {
+//        pagefactory.setBattery(battery);
+//        if (isPrepared) {
+//            pagefactory.onDraw(mCurrentPageCanvas);
+//            postInvalidate();
+//        }
+//    }
 
     public synchronized void setTextColor(int textColor, int titleColor) {
         resetTouchPoint();
@@ -314,15 +337,6 @@ public abstract   class BaseReadView extends View{
             postInvalidate();
         }
     }
-//
-//    public void setBattery(int battery) {
-//        pagefactory.setBattery(battery);
-//        if (isPrepared) {
-//            pagefactory.onDraw(mCurrentPageCanvas);
-//            postInvalidate();
-//        }
-//    }
-
 
     public void setPosition(int[] pos) {
         int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
@@ -340,25 +354,5 @@ public abstract   class BaseReadView extends View{
 
     public String getHeadLine() {
         return pagefactory.getHeadLineStr().replaceAll("@", "");
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (pagefactory != null) {
-            pagefactory.recycle();
-        }
-
-        if (mCurPageBitmap != null && !mCurPageBitmap.isRecycled()) {
-            mCurPageBitmap.recycle();
-            mCurPageBitmap = null;
-//            LogUtils.d("mCurPageBitmap recycle");
-        }
-
-        if (mNextPageBitmap != null && !mNextPageBitmap.isRecycled()) {
-            mNextPageBitmap.recycle();
-            mNextPageBitmap = null;
-//            LogUtils.d("mNextPageBitmap recycle");
-        }
     }
 }

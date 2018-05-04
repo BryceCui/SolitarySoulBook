@@ -3,6 +3,7 @@
     package="com.cuipengyu.solitarysoulbook">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".utils.ApplicationContextUtil"
@@ -19,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activitys.LoginActivity" />
+        <activity android:name=".activitys.ReadActivity"></activity>
     </application>
 
 </manifest>

@@ -6,5 +6,16 @@
     <string name="dialog_bottom_photo_tv">拍照</string>
     <string name="dialog_bottom_photo_check_tv">相册</string>
     <string name="dialog_bottom_photo_cancel_tv">取消</string>
+    <string name="read_chapter_list_tv">章节目录</string>
+    <string name="read_pageview_tv">仿真效果</string>
+    <string name="read_overlapped_tv">覆盖效果</string>
+    <string name="read_backgroud_tv">背景</string>
+
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="read_minfontsize__tv">Aa-</string>
+    <string name="read_maxfontsize__tv">Aa+</string>
+    <string name="main_bookshelf_tv">书架</string>
+    <string name="main_book_city_tv">书城</string>
+    <string name="main_setting_tv">设置</string>
+
 </resources>
