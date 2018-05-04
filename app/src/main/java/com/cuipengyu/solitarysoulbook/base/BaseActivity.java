@@ -19,8 +19,6 @@ public abstract class BaseActivity extends Activity {
     private CustomDialog dialog = null;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +36,10 @@ public abstract class BaseActivity extends Activity {
     //绑定布局文件
     public abstract int bindViewLayout();
 
-    public abstract void initData();
     //初始化控件
     public abstract void initView();
+
+    public abstract void initData();
 
     //显示正在加载dialog
     public void LoadingShow() {

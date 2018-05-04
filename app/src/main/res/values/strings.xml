@@ -14,5 +14,8 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="read_minfontsize__tv">Aa-</string>
     <string name="read_maxfontsize__tv">Aa+</string>
+    <string name="main_bookshelf_tv">书架</string>
+    <string name="main_book_city_tv">书城</string>
+    <string name="main_setting_tv">设置</string>
 
 </resources>
