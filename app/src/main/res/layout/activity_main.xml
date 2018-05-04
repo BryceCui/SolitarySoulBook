@@ -1,19 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     tools:context="com.cuipengyu.solitarysoulbook.activitys.MainActivity">
-<Button
-    android:onClick="onClick"
-    android:id="@+id/btn_watch"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-    <Button
-        android:onClick="onClick"
-        android:id="@+id/btn_disss"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/main_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_fl_tab_lv" />
+    <!--分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/main_fl_tab_lv"
+        android:background="@color/light_black" />
+
+    <LinearLayout
+        android:id="@+id/main_fl_tab_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <!--书架-->
+        <RelativeLayout
+            android:onClick="main_onClick"
+            android:id="@+id/bookshelf_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/bookshelf_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:src="@drawable/main_bookshelf_iv" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/bookshelf_message_count_tv"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignEnd="@+id/bookshelf_iv"
+                android:background="@drawable/main_tab_message_bg"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/bookshelf_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bookshelf_iv"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_bookshelf_tv"
+                android:textColor="@drawable/main_color_tv" />
+        </RelativeLayout>
+        <!--书城-->
+        <RelativeLayout
+            android:onClick="main_onClick"
+            android:id="@+id/book_city_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/book_city_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:src="@drawable/main_book_city_iv_bg" />
+
+            <TextView
+                android:id="@+id/book_city_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/book_city_iv"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_book_city_tv"
+                android:textColor="@drawable/main_color_tv" />
+        </RelativeLayout>
+        <!--设置-->
+        <RelativeLayout
+            android:onClick="main_onClick"
+            android:id="@+id/my_setting_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/my_setting_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:padding="6dp"
+                android:src="@drawable/main_setting_iv_bg" />
+            <TextView
+                android:id="@+id/my_setting_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/my_setting_iv"
+                android:layout_centerHorizontal="true"
+                android:text="@string/main_setting_tv"
+                android:textColor="@drawable/main_color_tv" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
