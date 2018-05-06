@@ -3,16 +3,11 @@ package com.cuipengyu.solitarysoulbook.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.Gravity;
 
 import com.cuipengyu.solitarysoulbook.R;
-import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 import com.cuipengyu.solitarysoulbook.widget.CustomDialog;
-
-import java.io.IOException;
 
 public abstract class BaseActivity extends Activity {
     private final String TAG = getClass().getName();

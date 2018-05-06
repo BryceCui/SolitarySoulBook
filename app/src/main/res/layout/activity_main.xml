@@ -35,14 +35,14 @@
 
             <ImageView
                 android:id="@+id/bookshelf_iv"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:padding="5dp"
                 android:src="@drawable/main_bookshelf_iv" />
 
             <TextView
-                android:visibility="gone"
+                android:text="10"
                 android:id="@+id/bookshelf_message_count_tv"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
@@ -72,8 +72,8 @@
 
             <ImageView
                 android:id="@+id/book_city_iv"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:padding="5dp"
                 android:src="@drawable/main_book_city_iv_bg" />
@@ -98,8 +98,8 @@
 
             <ImageView
                 android:id="@+id/my_setting_iv"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:padding="6dp"
                 android:src="@drawable/main_setting_iv_bg" />
