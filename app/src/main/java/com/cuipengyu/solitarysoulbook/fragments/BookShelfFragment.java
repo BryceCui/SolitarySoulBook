@@ -1,9 +1,5 @@
 package com.cuipengyu.solitarysoulbook.fragments;
 
-import android.app.Fragment;
-import android.os.Bundle;
-import android.view.View;
-
 import com.cuipengyu.solitarysoulbook.base.BaseFragment;
 
 /**
@@ -26,7 +22,8 @@ public class BookShelfFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(View view, Bundle savedInstanceState) {
+    protected void initView() {
 
     }
+
 }
