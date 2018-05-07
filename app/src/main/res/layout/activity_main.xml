@@ -6,11 +6,13 @@
     android:background="@color/white"
     tools:context="com.cuipengyu.solitarysoulbook.activitys.MainActivity">
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/main_fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/main_fl_tab_lv" />
+        android:layout_above="@+id/main_fl_tab_lv"
+      />
     <!--分割线-->
     <View
         android:layout_width="match_parent"
@@ -26,7 +28,7 @@
         android:orientation="horizontal">
         <!--书架-->
         <RelativeLayout
-            android:onClick="main_onClick"
+            android:onClick="onClick"
             android:id="@+id/bookshelf_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,7 +65,7 @@
         </RelativeLayout>
         <!--书城-->
         <RelativeLayout
-            android:onClick="main_onClick"
+            android:onClick="onClick"
             android:id="@+id/book_city_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -89,7 +91,7 @@
         </RelativeLayout>
         <!--设置-->
         <RelativeLayout
-            android:onClick="main_onClick"
+            android:onClick="onClick"
             android:id="@+id/my_setting_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
