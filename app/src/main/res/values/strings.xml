@@ -17,5 +17,6 @@
     <string name="main_bookshelf_tv">书架</string>
     <string name="main_book_city_tv">书城</string>
     <string name="main_setting_tv">设置</string>
+    <string name="base_toolbar_string_back">返回</string>
 
 </resources>
