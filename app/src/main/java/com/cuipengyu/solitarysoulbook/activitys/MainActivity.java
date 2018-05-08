@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
 
     /**
      * initialization  fragment bottom tab
-     *  one FragmentTransaction only  add one fragment
+     * one FragmentTransaction only  add one fragment
      */
     private void initFragments() {
         mShelfFragment = new BookShelfFragment();
@@ -79,6 +79,7 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
                 mManager.beginTransaction().show(mShelfFragment).hide(mSettingFragment).hide(mCityFragment).commit();
+                setTitleText("书架");
                 break;
             case 1:
                 bookshelf_tv.setSelected(false);
@@ -88,6 +89,7 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
                 mManager.beginTransaction().show(mCityFragment).hide(mSettingFragment).hide(mShelfFragment).commit();
+                setTitleText("书城");
                 break;
             case 2:
                 bookshelf_tv.setSelected(false);
@@ -97,6 +99,7 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(true);
                 my_setting_iv.setSelected(true);
                 mManager.beginTransaction().show(mSettingFragment).hide(mCityFragment).hide(mShelfFragment).commit();
+                setTitleText("个人设置");
                 break;
         }
     }
