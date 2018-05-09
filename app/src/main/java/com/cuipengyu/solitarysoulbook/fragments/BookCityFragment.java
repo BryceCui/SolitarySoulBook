@@ -18,7 +18,7 @@ public class BookCityFragment extends BaseFragment {
     }
     
     @Override
-    protected void ininData() {
+    protected void initData() {
 
     }
 

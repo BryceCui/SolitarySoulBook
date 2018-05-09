@@ -18,12 +18,12 @@ public class BookShelfFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView() {
+    protected void initData() {
 
     }
 
     @Override
-    protected void ininData() {
+    protected void initView() {
 
     }
 

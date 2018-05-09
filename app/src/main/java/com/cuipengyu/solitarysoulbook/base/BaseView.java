@@ -7,9 +7,9 @@ package com.cuipengyu.solitarysoulbook.base;
  */
 
 public interface BaseView<T> {
-    void lodingShow();
+    void LoadingShow();
 
-    void lodingDissmis();
+    void LoadingDismiss();
 
     void setPresenter(T presenter);
 }

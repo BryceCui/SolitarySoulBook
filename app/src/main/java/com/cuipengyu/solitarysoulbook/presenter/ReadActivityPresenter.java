@@ -24,22 +24,22 @@ public class ReadActivityPresenter implements ReadActivityController.ReadPresent
 
     @Override
     public void getChapterListData(String booid) {
-        mReadView.lodingShow();
+        mReadView.LoadingShow();
         mReadModel.getChapterListData(booid, new BaseHttpEntity<ChapterLink>() {
             @Override
             public void onSuccess(ChapterLink data) {
                 mReadView.setChapterListData(data);
-                mReadView.lodingDissmis();
+                mReadView.LoadingDismiss();
             }
 
             @Override
             public void onError(String error) {
-                mReadView.lodingDissmis();
+                mReadView.LoadingDismiss();
             }
 
             @Override
             public void onFinish() {
-                mReadView.lodingDissmis();
+                mReadView.LoadingDismiss();
             }
         });
 
