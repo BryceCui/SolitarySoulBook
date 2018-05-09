@@ -20,12 +20,12 @@ public class BindViewHolder  {
         this.views = new SparseArray<>();
     }
 
-    public BindViewHolder(View view, CustomDialog dialog) {
+    BindViewHolder(View view, CustomDialog dialog) {
         this.bindView = view;
         this.dialog = dialog;
         views = new SparseArray<>();
     }
-    public <T extends View> T getView(@IdRes int viewId) {
+    private <T extends View> T getView(@IdRes int viewId) {
         View view = views.get(viewId);
         if (view == null) {
             view = bindView.findViewById(viewId);
@@ -33,7 +33,7 @@ public class BindViewHolder  {
         }
         return (T) view;
     }
-    public BindViewHolder addOnClickListener(@IdRes final int viewId) {
+    public void addOnClickListener(@IdRes final int viewId) {
         final View view = getView(viewId);
         if (view != null) {
             if (!view.isClickable()) {
@@ -48,7 +48,6 @@ public class BindViewHolder  {
                 }
             });
         }
-        return this;
     }
     @Deprecated
     public BindViewHolder setOnClickListener(@IdRes int viewId, View.OnClickListener listener) {
