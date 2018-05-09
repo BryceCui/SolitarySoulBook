@@ -21,7 +21,7 @@ public class SettingFragment extends BaseFragment {
     }
 
     @Override
-    protected void ininData() {
+    protected void initData() {
 
     }
 }

@@ -42,7 +42,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ininData();
+        initData();
     }
 
     @Override
@@ -53,7 +53,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getContentViewLayoutId();
 
-    protected abstract void ininData();
+    protected abstract void initData();
 
     protected abstract void initView();
 
