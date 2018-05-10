@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.base;
+package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 import java.net.SocketTimeoutException;
 
