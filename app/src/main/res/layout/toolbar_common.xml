@@ -23,6 +23,13 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
+        <android.support.v7.widget.SearchView
+            android:layout_toRightOf="@+id/base_toolbar_back"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/base_toolbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <TextView
             android:id="@+id/base_toolbar_title"
             android:layout_width="wrap_content"

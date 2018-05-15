@@ -1,23 +1,20 @@
 package com.cuipengyu.solitarysoulbook.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cuipengyu.solitarysoulbook.R;
+
+import java.lang.reflect.Field;
 
 /**
  * Create by    ： 崔鹏宇
@@ -28,6 +25,7 @@ import com.cuipengyu.solitarysoulbook.R;
  */
 public class CommonToolbar extends Toolbar {
     private TextView base_toolbar_back, base_toolbar_title, base_toolbar_menu;
+    private SearchView mSearchView;
 
     public CommonToolbar(Context context) {
         super(context);
@@ -51,7 +49,15 @@ public class CommonToolbar extends Toolbar {
         base_toolbar_title = findViewById(R.id.base_toolbar_title);
         base_toolbar_menu = findViewById(R.id.base_toolbar_menu);
     }
-
+    public void searchInit(){
+        mSearchView = findViewById(R.id.base_toolbar_search);
+        mSearchView.setQueryHint("请输入作者或者书名搜索");
+        //设置搜索图标是否在框内
+        mSearchView.setIconifiedByDefault(false);
+        //设置搜索框有字时显示叉叉，无字时隐藏叉叉
+        mSearchView.onActionViewExpanded();
+        mSearchView.setIconified(true);
+    }
     //设置左边图片
     public void setLeftIamge() {
         setLeftIamge(R.drawable.back);
@@ -95,5 +101,36 @@ public class CommonToolbar extends Toolbar {
         base_toolbar_menu.setOnClickListener(listener);
     }
 
+    public void setSearchVisibility(int visibility) {
+        mSearchView.setVisibility(visibility);
+        mSearchView.setVisibility(VISIBLE);
+    }
+
+    //设置点击搜索框右边叉叉的事件
+    public void setSearchCloseListener(SearchView.OnCloseListener listener) {
+        mSearchView.setOnCloseListener(listener);
+    }
+    //设置文字变化监听事件
+    public void setQueryTextListener(SearchView.OnQueryTextListener listener){
+        mSearchView.setOnQueryTextListener(listener);
+    }
+    public void setSearchUnderlineTransparency(){
+        setUnderLinetransparent(mSearchView);
+    }
+
+    private void setUnderLinetransparent(SearchView searchView){
+        try {
+            Class<?> argClass = searchView.getClass();
+            // mSearchPlate是SearchView父布局的名字
+            Field ownField = argClass.getDeclaredField("mSearchPlate");
+            ownField.setAccessible(true);
+            View mView = (View) ownField.get(searchView);
+            mView.setBackgroundColor(Color.TRANSPARENT);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
