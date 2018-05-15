@@ -8,8 +8,6 @@ package com.cuipengyu.solitarysoulbook.base;
 
 public interface BaseView<T> {
     void LoadingShow();
-
     void LoadingDismiss();
-
     void setPresenter(T presenter);
 }
