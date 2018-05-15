@@ -5,9 +5,17 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cuipengyu.solitarysoulbook.R;
 
@@ -55,16 +63,11 @@ public class CommonToolbar extends Toolbar {
         base_toolbar_back.setCompoundDrawables(image, null, null, null);
     }
 
-    //设置左边返回字
-    public void setLeftText() {
-        setLeftText("返回");
-    }
-
     public void setLeftText(String text) {
         base_toolbar_back.setText(text);
     }
 
-    public void setTitle(String title) {
+    public void setTitleBar(String title) {
         base_toolbar_title.setGravity(Gravity.CENTER);
         base_toolbar_title.setText(title);
     }
@@ -75,9 +78,13 @@ public class CommonToolbar extends Toolbar {
     }
 
     public void setRightImage(int idRes) {
-        Drawable image = getResources().getDrawable(idRes, null);
-        image.setBounds(0, 0, image.getMinimumWidth(), image.getMinimumHeight());
-        base_toolbar_back.setCompoundDrawables(null, null, image, null);
+        if (idRes != 0) {
+            Drawable image = getResources().getDrawable(idRes, null);
+            image.setBounds(0, 0, image.getMinimumWidth(), image.getMinimumHeight());
+            base_toolbar_menu.setCompoundDrawables(null, null, image, null);
+        } else {
+            base_toolbar_menu.setCompoundDrawables(null, null, null, null);
+        }
     }
 
     public void setLeftListener(OnClickListener listener) {
@@ -88,20 +95,5 @@ public class CommonToolbar extends Toolbar {
         base_toolbar_menu.setOnClickListener(listener);
     }
 
-    public void setLeftVisibility(int visibility) {
-        base_toolbar_back.setVisibility(visibility);
-    }
 
-    public void setTitleVisibility(int visibility) {
-        base_toolbar_title.setVisibility(visibility);
-    }
-
-    public void setRightVisibility(int visibility) {
-        base_toolbar_menu.setVisibility(visibility);
-    }
-
-    //设置toolbar状态栏颜色
-    public void setToolbarBackground(int res) {
-        this.setBackgroundResource(res);
-    }
 }

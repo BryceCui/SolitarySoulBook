@@ -31,16 +31,6 @@ public class ReadActivity extends BaseActivity implements ReadActivityController
 
     }
 
-//    @Override
-//    public void LoadingShow() {
-//        LoadingShow();
-//    }
-
-//    @Override
-//    public void LoadingDismiss() {
-//        LoadingDismiss();
-//    }
-
     @Override
     public void setPresenter(ReadActivityController.ReadPresenter presenter) {
         this.mReadActivityPresenter = presenter;

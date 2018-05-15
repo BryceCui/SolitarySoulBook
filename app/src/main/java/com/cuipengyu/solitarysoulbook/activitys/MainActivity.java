@@ -2,32 +2,26 @@ package com.cuipengyu.solitarysoulbook.activitys;
 
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
 import com.cuipengyu.solitarysoulbook.fragments.BookCityFragment;
 import com.cuipengyu.solitarysoulbook.fragments.BookShelfFragment;
 import com.cuipengyu.solitarysoulbook.fragments.SettingFragment;
-import com.cuipengyu.solitarysoulbook.utils.ApplicationContextUtil;
-import com.squareup.leakcanary.RefWatcher;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private BookShelfFragment mShelfFragment;
     private BookCityFragment mCityFragment;
     private SettingFragment mSettingFragment;
     private FragmentManager mManager;
     private TextView my_setting_tv, book_city_tv, bookshelf_tv;
     private ImageView bookshelf_iv, book_city_iv, my_setting_iv;
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RefWatcher refWatcher = ApplicationContextUtil.getRefWatcher(this);
-        refWatcher.watch(this);
-    }
+    private TextView base_toolbar_menu;
 
     @Override
     public int bindViewLayout() {
@@ -42,6 +36,7 @@ public class MainActivity extends BaseActivity {
         bookshelf_iv = findViewById(R.id.bookshelf_iv);
         book_city_iv = findViewById(R.id.book_city_iv);
         my_setting_iv = findViewById(R.id.my_setting_iv);
+        base_toolbar_menu = findViewById(R.id.base_toolbar_menu);
     }
 
     @Override
@@ -49,11 +44,17 @@ public class MainActivity extends BaseActivity {
         initFragments();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     /**
      * initialization  fragment bottom tab
      * one FragmentTransaction only  add one fragment
      */
     private void initFragments() {
+        base_toolbar_menu.setOnClickListener(this);
         mShelfFragment = new BookShelfFragment();
         mCityFragment = new BookCityFragment();
         mSettingFragment = new SettingFragment();
@@ -79,7 +80,8 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
                 mManager.beginTransaction().show(mShelfFragment).hide(mSettingFragment).hide(mCityFragment).commit();
-                setTitleText("书架");
+                setTitleBar("书架");
+                setRightImage(R.drawable.searchview_bg);
                 break;
             case 1:
                 bookshelf_tv.setSelected(false);
@@ -89,7 +91,8 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
                 mManager.beginTransaction().show(mCityFragment).hide(mSettingFragment).hide(mShelfFragment).commit();
-                setTitleText("书城");
+                setTitleBar("书城");
+                setRightImage(R.drawable.searchview_bg);
                 break;
             case 2:
                 bookshelf_tv.setSelected(false);
@@ -99,7 +102,8 @@ public class MainActivity extends BaseActivity {
                 my_setting_tv.setSelected(true);
                 my_setting_iv.setSelected(true);
                 mManager.beginTransaction().show(mSettingFragment).hide(mCityFragment).hide(mShelfFragment).commit();
-                setTitleText("个人设置");
+                setTitleBar("个人中心");
+                setRightImage(0);
                 break;
         }
     }
@@ -114,6 +118,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.my_setting_rv:
                 setTabColor(2);
+                break;
+            case R.id.base_toolbar_menu:
+                //点击搜索跳转搜索页面操作
+                Toast.makeText(this, "点击了搜索", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

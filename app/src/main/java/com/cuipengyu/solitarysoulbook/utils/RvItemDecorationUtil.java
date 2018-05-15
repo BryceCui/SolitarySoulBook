@@ -25,5 +25,4 @@ public class RvItemDecorationUtil extends RecyclerView.ItemDecoration {
         outRect.right = mSpace;
         outRect.bottom = mSpace;
     }
-
 }

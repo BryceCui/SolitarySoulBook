@@ -1,12 +1,13 @@
 package com.cuipengyu.solitarysoulbook.base;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.widget.CommonToolbar;
@@ -15,26 +16,36 @@ import com.cuipengyu.solitarysoulbook.widget.CustomDialog;
 public abstract class BaseActivity extends AppCompatActivity {
     private final String TAG = getClass().getName();
     private CustomDialog dialog = null;
-    private CommonToolbar toolbar;
+    private CommonToolbar toolbar = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(bindViewLayout());
+        initStatus();
         initHeader();
         initView();
         initData();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dialog = null;
-    }
-
     //绑定布局文件
     public abstract int bindViewLayout();
+
+    //设置沉浸式状态栏
+    private void initStatus() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            ViewGroup contentFrameLayout = findViewById(Window.ID_ANDROID_CONTENT);
+            contentFrameLayout.getChildAt(0).setFitsSystemWindows(true);
+        }
+    }
 
     private void initHeader() {
         toolbar = findViewById(R.id.toolbar_common);
@@ -45,53 +56,31 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void initData();
 
-    public void setLeftIamge(@DrawableRes int idRes) {
-        toolbar.setLeftIamge(idRes);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog = null;
     }
 
-    public void setLeftText(String text) {
-        toolbar.setLeftText(text);
+    public void setTitleBar(String title){
+      toolbar.setTitleBar(title);
     }
-
-    public void setRightImage(int id) {
-        toolbar.setRightImage(id);
+    public void setRightImage(int ids){
+        toolbar.setRightImage(ids);
     }
-
-    public void setRightText(String text) {
+    public void setRightText(String text){
         toolbar.setRightText(text);
     }
-
-    public void setTitleText(String text) {
-        toolbar.setTitle(text);
+    public void setLeftBarBack() {
+        toolbar.setLeftListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
-
-    public void setToolbarBackGround(int id) {
-        toolbar.setToolbarBackground(id);
-    }
-
-    public void setLeftsetVisibility(int visibility) {
-        toolbar.setLeftVisibility(visibility);
-    }
-
-    public void setRightVisibility(int visibility) {
-        toolbar.setRightVisibility(visibility);
-    }
-
-    public void ToolbarVisibility(int visibility) {
-        toolbar.setVisibility(visibility);
-    }
-
-    public void setLeftListener(View.OnClickListener listener) {
-        toolbar.setLeftListener(listener);
-    }
-
-    public void setRightListener(View.OnClickListener listener) {
+    public void setRightListener(View.OnClickListener listener){
         toolbar.setRightListener(listener);
-    }
-
-    //设置显示搜索并且隐藏标题
-    public void setShowSearchView() {
-        toolbar.setTitleVisibility(View.GONE);
     }
 
     //显示正在加载dialog
@@ -105,9 +94,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog = null;
     }
 
-    protected void addFragemnt(@NonNull BaseFragment baseFragment, @NonNull @IdRes int fragmentId) {
-        if (baseFragment != null) {
-            getFragmentManager().beginTransaction().replace(fragmentId, baseFragment, baseFragment.getClass().getSimpleName()).addToBackStack(baseFragment.getClass().getSimpleName()).commitAllowingStateLoss();
+    /**
+     * 获取状态栏高度
+     *
+     * @return
+     */
+    public int getStatusBarHeight() {
+        int statusLayoutHeight = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusLayoutHeight = getResources().getDimensionPixelSize(resourceId);
         }
+        return statusLayoutHeight;
     }
+
 }
