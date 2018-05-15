@@ -3,6 +3,7 @@ package com.cuipengyu.solitarysoulbook.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void initHeader() {
         toolbar = findViewById(R.id.toolbar_common);
+//        setSearchVisibility(View.GONE);
     }
 
     //初始化控件
@@ -62,15 +64,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog = null;
     }
 
-    public void setTitleBar(String title){
-      toolbar.setTitleBar(title);
+    public void setLeftBar(String text) {
+        toolbar.setLeftText(text);
     }
-    public void setRightImage(int ids){
+
+    public void setLeftImage(int Ides) {
+        toolbar.setLeftIamge(Ides);
+    }
+
+    public void setLeftImage() {
+        toolbar.setLeftIamge();
+    }
+
+    public void setTitleBar(String title) {
+        toolbar.setTitleBar(title);
+    }
+
+    public void setRightImage(int ids) {
         toolbar.setRightImage(ids);
     }
-    public void setRightText(String text){
+
+    public void setRightText(String text) {
         toolbar.setRightText(text);
     }
+
     public void setLeftBarBack() {
         toolbar.setLeftListener(new View.OnClickListener() {
             @Override
@@ -79,8 +96,28 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
     }
-    public void setRightListener(View.OnClickListener listener){
+
+    public void setRightListener(View.OnClickListener listener) {
         toolbar.setRightListener(listener);
+    }
+
+    //初始化SearchView
+    public void initSearch() {
+        toolbar.searchInit();
+        toolbar.setSearchUnderlineTransparency();
+
+    }
+
+    public void setSearchVisibility(int visibility) {
+        toolbar.setSearchVisibility(visibility);
+    }
+
+    public void setSearchCloseListener(SearchView.OnCloseListener listener) {
+        toolbar.setSearchCloseListener(listener);
+    }
+
+    public void setQueryTextListener(SearchView.OnQueryTextListener listener) {
+        toolbar.setQueryTextListener(listener);
     }
 
     //显示正在加载dialog

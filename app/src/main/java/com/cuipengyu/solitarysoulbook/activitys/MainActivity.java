@@ -121,6 +121,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.base_toolbar_menu:
                 //点击搜索跳转搜索页面操作
+                Intent intent=new Intent(this,SearchViewActivity.class);
+                startActivity(intent);
                 Toast.makeText(this, "点击了搜索", Toast.LENGTH_SHORT).show();
                 break;
         }
