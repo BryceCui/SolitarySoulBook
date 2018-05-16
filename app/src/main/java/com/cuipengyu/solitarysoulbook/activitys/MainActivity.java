@@ -110,13 +110,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bookshelf_rv:
+            case R.id.bookshelf_rl:
                 setTabColor(0);
                 break;
-            case R.id.book_city_rv:
+            case R.id.book_city_rl:
                 setTabColor(1);
                 break;
-            case R.id.my_setting_rv:
+            case R.id.my_setting_rl:
                 setTabColor(2);
                 break;
             case R.id.base_toolbar_menu:

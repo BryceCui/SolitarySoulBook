@@ -20,9 +20,11 @@ public abstract class AdapterDelegate<T> {
      * @param position
      * @return
      */
-    protected abstract boolean isForViewType(List<T> itmes, int position);
+    protected abstract boolean isForViewType(T itmes, int position);
 
     protected abstract BaseViewHolder onCreateViewHolder(ViewGroup parent);
 
-    protected abstract void onBindViewHolder(List<T> itmes, int position, BaseViewHolder holder);
+    protected abstract void onBindViewHolder(T itmes, int position, BaseViewHolder holder);
+
+    protected abstract int ItemCount(T items);
 }

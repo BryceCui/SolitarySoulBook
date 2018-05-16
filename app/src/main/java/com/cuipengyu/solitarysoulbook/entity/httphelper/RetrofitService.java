@@ -2,6 +2,7 @@ package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
+import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
 
 import java.util.Map;
 
@@ -28,9 +29,13 @@ public interface RetrofitService {
 
     /**
      * 获取小说章节
+     *
      * @param bookId
      * @return
      */
     @GET("mix-atoc/{bookId}")
     Observable<ChapterLink> getChapterList(@Path("bookId") String bookId);
+
+    @GET("book/hot-word")
+    Observable<HotWord> getHotWord();
 }

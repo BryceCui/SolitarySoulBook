@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.controller;
+package com.cuipengyu.solitarysoulbook.mvp.controller;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
 import com.cuipengyu.solitarysoulbook.base.BasePresenter;

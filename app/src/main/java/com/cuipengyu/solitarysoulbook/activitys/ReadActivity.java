@@ -2,9 +2,9 @@ package com.cuipengyu.solitarysoulbook.activitys;
 
 import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
-import com.cuipengyu.solitarysoulbook.controller.ReadActivityController;
+import com.cuipengyu.solitarysoulbook.mvp.controller.ReadActivityController;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
-import com.cuipengyu.solitarysoulbook.presenter.ReadActivityPresenter;
+import com.cuipengyu.solitarysoulbook.mvp.presenter.ReadActivityPresenter;
 
 public class ReadActivity extends BaseActivity implements ReadActivityController.ReadView {
     private ReadActivityController.ReadPresenter mReadActivityPresenter;
