@@ -48,9 +48,9 @@ public class CommonToolbar extends Toolbar {
         base_toolbar_back = findViewById(R.id.base_toolbar_back);
         base_toolbar_title = findViewById(R.id.base_toolbar_title);
         base_toolbar_menu = findViewById(R.id.base_toolbar_menu);
+        mSearchView = findViewById(R.id.base_toolbar_search);
     }
     public void searchInit(){
-        mSearchView = findViewById(R.id.base_toolbar_search);
         mSearchView.setQueryHint("请输入作者或者书名搜索");
         //设置搜索图标是否在框内
         mSearchView.setIconifiedByDefault(false);

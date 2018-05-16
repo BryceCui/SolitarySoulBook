@@ -31,7 +31,7 @@
         android:orientation="horizontal">
         <!--书架-->
         <RelativeLayout
-            android:id="@+id/bookshelf_rv"
+            android:id="@+id/bookshelf_rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
         </RelativeLayout>
         <!--书城-->
         <RelativeLayout
-            android:id="@+id/book_city_rv"
+            android:id="@+id/book_city_rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -94,7 +94,7 @@
         </RelativeLayout>
         <!--设置-->
         <RelativeLayout
-            android:id="@+id/my_setting_rv"
+            android:id="@+id/my_setting_rl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

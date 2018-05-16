@@ -6,7 +6,7 @@ package com.cuipengyu.solitarysoulbook.base;
  * Created by cuipengyu on 2018/3/10.
  */
 
-public interface BaseView<T> {
+public interface BaseView<T extends BasePresenter> {
     void LoadingShow();
     void LoadingDismiss();
     void setPresenter(T presenter);

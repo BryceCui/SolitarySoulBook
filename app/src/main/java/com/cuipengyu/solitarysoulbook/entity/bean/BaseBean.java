@@ -1,5 +1,4 @@
 package com.cuipengyu.solitarysoulbook.entity.bean;
-@Deprecated
 public class BaseBean {
 
     private boolean ok;

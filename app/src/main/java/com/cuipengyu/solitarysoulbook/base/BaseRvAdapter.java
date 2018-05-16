@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
  */
 public class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
     private AdapterDelegateManager<T> mManager;
-    private List<T> mData;
+    private T mData;
 
-    public BaseRvAdapter(List<T> data, @Nullable AdapterDelegateManager<T> manager) {
+    public BaseRvAdapter(T data, @Nullable AdapterDelegateManager<T> manager) {
         this.mData = data;
         this.mManager = manager;
     }
@@ -42,38 +43,38 @@ public class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        Log.e("getItemCount",mManager.getItemCount(mData)+"");
+
+        return mManager.getItemCount(mData);
     }
 
-    @Override
-    public void onAttachedToRecyclerView(@NonNull final RecyclerView recyclerView) {
-        final RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
-            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int type = getItemViewType(position);
-                    /**
-                     * 对类型进行判断
-                     *  总共分成6份进行垂直排列
-                     * new GridLayoutManager(this,6,GridLayoutManager.VERTICAL,false)
-                     *  return 3 就是6/3=2 把itme分成2列
-                     *  return 1 就是6/1=6 把item分成6列
-                     *  gridManager.getSpanCount()就是获取设置的SpanCount也就是6 所以说就是铺满
-                     */
-                    switch (type) {
-                        case 1:
-                            return 2;
-                        case 0:
-                            return 1;
-                        default:
-                            return gridManager.getSpanCount();
-                    }
-                }
-            });
-        }
-        super.onAttachedToRecyclerView(recyclerView);
-    }
+//    @Override
+//    public void onAttachedToRecyclerView(@NonNull final RecyclerView recyclerView) {
+//        final RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+//        if (manager instanceof GridLayoutManager) {
+//            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+//            setSpanSize(gridManager);
+//            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//                @Override
+//                public int getSpanSize(int position) {
+//                    int type = getItemViewType(position);
+//                    /**
+//                     * 对类型进行判断
+//                     *  总共分成6份进行垂直排列
+//                     * new GridLayoutManager(this,6,GridLayoutManager.VERTICAL,false)
+//                     *  return 3 就是6/3=2 把itme分成2列
+//                     *  return 1 就是6/1=6 把item分成6列
+//                     *  gridManager.getSpanCount()就是获取设置的SpanCount也就是6 所以说就是铺满
+//                     */
+//                    switch (type) {
+//                        setSpanSize(type);
+//                        default:
+//                            return gridManager.getSpanCount();
+//                    }
+//                }
+//            });
+//        }
+//        super.onAttachedToRecyclerView(recyclerView);
+//    }
 
 }

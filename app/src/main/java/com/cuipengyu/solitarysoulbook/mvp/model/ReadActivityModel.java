@@ -1,8 +1,8 @@
-package com.cuipengyu.solitarysoulbook.model;
+package com.cuipengyu.solitarysoulbook.mvp.model;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.DefaultObserver;
-import com.cuipengyu.solitarysoulbook.controller.ReadActivityController;
+import com.cuipengyu.solitarysoulbook.mvp.controller.ReadActivityController;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitHelper;
 

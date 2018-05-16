@@ -1,9 +1,9 @@
-package com.cuipengyu.solitarysoulbook.presenter;
+package com.cuipengyu.solitarysoulbook.mvp.presenter;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
-import com.cuipengyu.solitarysoulbook.controller.ReadActivityController;
+import com.cuipengyu.solitarysoulbook.mvp.controller.ReadActivityController;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
-import com.cuipengyu.solitarysoulbook.model.ReadActivityModel;
+import com.cuipengyu.solitarysoulbook.mvp.model.ReadActivityModel;
 
 /**
  * Create by    ： 崔鹏宇
@@ -47,5 +47,6 @@ public class ReadActivityPresenter implements ReadActivityController.ReadPresent
 
     @Override
     public void onStar() {
+
     }
 }

@@ -1,6 +1,7 @@
 package com.cuipengyu.solitarysoulbook.base;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
@@ -16,6 +17,19 @@ import java.util.List;
 public class AdapterDelegateManager<T> {
     private SparseArray<AdapterDelegate<T>> mDelegates = new SparseArray<>();
 
+    public int getItemCount(T t) {
+        int count=0;
+        int delegateCount = mDelegates.size();
+        for (int i = 0; i < delegateCount; i++) {
+            //查看第几个位置的值：
+            AdapterDelegate<T> delegate = mDelegates.valueAt(i);
+            count=+ delegate.ItemCount(t);
+            Log.e("ItemCount--count",count+"");
+
+        }
+        return count;
+    }
+
     public void addDelegate(AdapterDelegate<T> data) {
         int newItemType = mDelegates.size();
         addDelegate(newItemType, data);
@@ -29,7 +43,7 @@ public class AdapterDelegateManager<T> {
     }
 
     //没有指定类型时，直接添加根据添加顺序赋予类型
-    public int getItemViewType(List<T> items, int position) {
+    public int getItemViewType(T items, int position) {
         if (items == null) {
             throw new NullPointerException("Items is null on AdapterDelegateManager getItemViewType");
         }
@@ -66,7 +80,7 @@ public class AdapterDelegateManager<T> {
         }
     }
 
-    public void onBindViewHolder(List<T> items, int position, BaseViewHolder viewHolder) {
+    public void onBindViewHolder(T items, int position, BaseViewHolder viewHolder) {
         AdapterDelegate<T> delegate = mDelegates.get(viewHolder.getItemViewType());
         if (delegate == null) {
             throw new NullPointerException("No AdapterDelegate added for ViewType " + viewHolder.getItemViewType());
@@ -74,5 +88,4 @@ public class AdapterDelegateManager<T> {
             delegate.onBindViewHolder(items, position, viewHolder);
         }
     }
-
 }
