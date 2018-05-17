@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_marginStart="10dp"
@@ -24,8 +24,7 @@
             android:textSize="16sp" />
 
         <android.support.v7.widget.SearchView
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_margin="10dp"
             android:background="@drawable/toolbar_searchview_shap_bg"
             android:layout_toEndOf="@+id/base_toolbar_back"
             android:layout_centerInParent="true"

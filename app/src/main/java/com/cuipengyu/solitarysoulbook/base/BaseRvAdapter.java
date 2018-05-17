@@ -2,12 +2,8 @@ package com.cuipengyu.solitarysoulbook.base;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
-
-import java.util.List;
 
 /**
  * Create by    ： 崔鹏宇
@@ -43,9 +39,10 @@ public class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.e("getItemCount",mManager.getItemCount(mData)+"");
-
         return mManager.getItemCount(mData);
+    }
+    public T getData(){
+        return mData;
     }
 
 //    @Override
