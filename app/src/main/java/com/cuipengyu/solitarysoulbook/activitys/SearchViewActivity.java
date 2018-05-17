@@ -8,6 +8,7 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 
 import com.cuipengyu.solitarysoulbook.R;
+import com.cuipengyu.solitarysoulbook.adapter.GridLayoutAdapter;
 import com.cuipengyu.solitarysoulbook.adapter.HotWordAdapter;
 import com.cuipengyu.solitarysoulbook.base.AdapterDelegateManager;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
@@ -15,6 +16,8 @@ import com.cuipengyu.solitarysoulbook.base.BaseRvAdapter;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
 import com.cuipengyu.solitarysoulbook.mvp.controller.SearchActivityController;
 import com.cuipengyu.solitarysoulbook.mvp.presenter.SearchActivityPresenter;
+import com.cuipengyu.solitarysoulbook.view.HotWordLayout;
+import com.cuipengyu.solitarysoulbook.widget.SearchviewlayoutManger;
 
 import static android.view.View.VISIBLE;
 
@@ -72,9 +75,9 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
         Log.e("HotWord",hotWordData.getHotWords().size()+"");
         AdapterDelegateManager<HotWord> manager = new AdapterDelegateManager<HotWord>();
         manager.addDelegate(new HotWordAdapter());
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3,GridLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 6,GridLayoutManager.VERTICAL,false));
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new BaseRvAdapter<HotWord>(hotWordData,manager));
+        mRecyclerView.setAdapter(new GridLayoutAdapter(hotWordData,manager));
     }
 
     @Override
