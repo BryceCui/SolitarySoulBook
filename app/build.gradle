@@ -48,4 +48,6 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //解析html数据工具
     implementation 'org.jsoup:jsoup:1.11.2'
+    //google  FlexboxLayout
+    implementation 'com.google.android:flexbox:1.0.0'
 }
