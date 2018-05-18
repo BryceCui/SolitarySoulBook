@@ -1,6 +1,5 @@
 package com.cuipengyu.solitarysoulbook.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.AdapterDelegate;
 import com.cuipengyu.solitarysoulbook.base.BaseViewHolder;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
-
-import java.util.List;
 
 /**
  * Create by    ： 崔鹏宇
@@ -29,7 +26,7 @@ public class HotWordAdapter extends AdapterDelegate<HotWord> {
 
     @Override
     protected BaseViewHolder onCreateViewHolder(ViewGroup parent) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_rv_hotwoed, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_hotwoed_rv_item, parent, false);
         return new BaseViewHolder(view);
     }
 
