@@ -50,4 +50,9 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.2'
     //google  FlexboxLayout
     implementation 'com.google.android:flexbox:1.0.0'
+    //GreenDao
+    implementation 'org.greenrobot:greendao:3.2.2'
+    //在游览器中可以查看数据库的依赖
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
 }

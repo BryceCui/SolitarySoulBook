@@ -8,6 +8,7 @@ import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.AdapterDelegate;
 import com.cuipengyu.solitarysoulbook.base.BaseViewHolder;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
+import com.cuipengyu.solitarysoulbook.entity.bean.SearchViewBean;
 
 /**
  * Create by    ： 崔鹏宇
@@ -16,27 +17,34 @@ import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
  * Github       ： https://github.com/SolitarySoul
  * Instructions ：
  */
-public class HotWordAdapter extends AdapterDelegate<HotWord> {
+public class SearchHotWordAdapter extends AdapterDelegate<SearchViewBean> {
     View view;
 
     @Override
-    protected boolean isForViewType(HotWord itmes, int position) {
-        return true;
+    protected boolean isForViewType(SearchViewBean itmes, int position) {
+        return position<20;
     }
 
     @Override
     protected BaseViewHolder onCreateViewHolder(ViewGroup parent) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_hotwoed_rv_item, parent, false);
-        return new BaseViewHolder(view);
+        return new HotWordHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(HotWord itmes, int position, BaseViewHolder holder) {
-        holder.setText(R.id.search_tv, itmes.getHotWords().get(position));
+    protected void onBindViewHolder(SearchViewBean itmes, int position, BaseViewHolder holder) {
+
+        holder.setText(R.id.search_tv, itmes.getHotWord().getHotWords().get(position));
     }
 
     @Override
-    protected int ItemCount(HotWord item) {
-        return item.getHotWords().size();
+    protected int ItemCount(SearchViewBean item) {
+        return item.getHotWord().getHotWords().size();
+    }
+    class  HotWordHolder extends BaseViewHolder{
+
+        public HotWordHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

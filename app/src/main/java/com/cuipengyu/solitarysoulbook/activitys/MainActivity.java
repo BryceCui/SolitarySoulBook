@@ -41,7 +41,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initData() {
+        for (int i = 0; i <2 ; i++) {
+            int j=0;
+            j+=i;
+        }
         initFragments();
+
     }
 
     @Override

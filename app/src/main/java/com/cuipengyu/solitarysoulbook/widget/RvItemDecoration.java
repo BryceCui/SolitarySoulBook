@@ -1,4 +1,4 @@
-package com.cuipengyu.solitarysoulbook.utils;
+package com.cuipengyu.solitarysoulbook.widget;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +8,10 @@ import android.view.View;
  * 通用recyclerview的分割线
  * Created by cuipengyu on 2018/3/27.
  */
-public class RvItemDecorationUtil extends RecyclerView.ItemDecoration {
+public class RvItemDecoration extends RecyclerView.ItemDecoration {
     private int mSpace;
 
-    public RvItemDecorationUtil(int space) {
+    public RvItemDecoration(int space) {
         this.mSpace = space;
     }
 
