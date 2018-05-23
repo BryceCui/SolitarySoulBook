@@ -22,7 +22,8 @@ public class SearchHotWordAdapter extends AdapterDelegate<SearchViewBean> {
 
     @Override
     protected boolean isForViewType(SearchViewBean itmes, int position) {
-        return position<20;
+//        return position<20;
+        return position < itmes.getHotWord().getHotWords().size();
     }
 
     @Override
@@ -41,7 +42,8 @@ public class SearchHotWordAdapter extends AdapterDelegate<SearchViewBean> {
     protected int ItemCount(SearchViewBean item) {
         return item.getHotWord().getHotWords().size();
     }
-    class  HotWordHolder extends BaseViewHolder{
+
+    class HotWordHolder extends BaseViewHolder {
 
         public HotWordHolder(View itemView) {
             super(itemView);

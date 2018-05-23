@@ -25,7 +25,6 @@ public class AdapterDelegateManager<T> {
             //查看第几个位置的值：
             AdapterDelegate<T> delegate = mDelegates.valueAt(i);
             count+= delegate.ItemCount(t);
-            Log.e("count",count+"");
         }
         return count;
     }
@@ -87,5 +86,8 @@ public class AdapterDelegateManager<T> {
         } else {
             delegate.onBindViewHolder(items, position, viewHolder);
         }
+    }
+    public int getMangerCount(){
+        return mDelegates.size();
     }
 }

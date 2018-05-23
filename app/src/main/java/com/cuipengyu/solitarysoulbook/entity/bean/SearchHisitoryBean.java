@@ -12,14 +12,8 @@ import java.util.List;
  */
 public class SearchHisitoryBean {
     private Long id;
-    private int RV_ITEM_TYPE = 0x0002;
     private String name = "搜索历史";
     private List<String> searchName;
-
-    public int getRV_ITEM_TYPE() {
-        return RV_ITEM_TYPE;
-    }
-
     public String getName() {
         return name == null ? "" : name;
     }

@@ -1,7 +1,9 @@
 package com.cuipengyu.solitarysoulbook.activitys;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 
 import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.adapter.SearchHistoryAdapter;
@@ -24,11 +26,11 @@ import java.util.List;
 import static android.view.View.VISIBLE;
 
 public class SearchViewActivity extends BaseActivity implements SearchView.OnCloseListener, SearchView.OnQueryTextListener, SearchActivityController.searchView {
-
     private RecyclerView mRecyclerView;
     private HotWord mHotWord;
     private SearchViewBean mSearchViewBean = null;
     private SearchActivityController.searchPresenter mSearchPresenter = null;
+    private List<String> mTitleItems;
 
     @Override
     public int bindViewLayout() {
@@ -48,6 +50,8 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
         setSearchVisibility(VISIBLE);
         setSearchCloseListener(this);
         setQueryTextListener(this);
+        mTitleItems = new ArrayList<>();
+        mTitleItems.add("历史搜索");
         mSearchViewBean = new SearchViewBean();
         SearchHisitoryBean hisitoryBean = new SearchHisitoryBean();
         List<String> strings = new ArrayList<>();
@@ -87,10 +91,10 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
         AdapterDelegateManager<SearchViewBean> manager = new AdapterDelegateManager<SearchViewBean>();
         manager.addDelegate(new SearchHotWordAdapter());
         manager.addDelegate(new SearchHistoryAdapter());
-        mRecyclerView.addItemDecoration(new RvTitleItemDecoration());
-        mRecyclerView.setLayoutManager(new FlexboxLayoutManager(this));
+        FlexboxLayoutManager flexboxLayoutManager=new FlexboxLayoutManager(this);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new RvTitleItemDecoration(mTitleItems,80));
         mRecyclerView.setAdapter(new BaseRvAdapter<SearchViewBean>(mSearchViewBean, manager));
-
     }
 
     @Override
