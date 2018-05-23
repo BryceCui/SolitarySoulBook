@@ -3,7 +3,10 @@ package com.cuipengyu.solitarysoulbook.base;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
+
+import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 
 /**
  * Create by    ： 崔鹏宇

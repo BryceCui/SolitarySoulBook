@@ -5,6 +5,8 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import com.cuipengyu.solitarysoulbook.utils.LogUtils;
+
 import java.util.List;
 
 /**
@@ -16,14 +18,13 @@ import java.util.List;
  */
 public class AdapterDelegateManager<T> {
     private SparseArray<AdapterDelegate<T>> mDelegates = new SparseArray<>();
-
     public int getItemCount(T t) {
-        int count=0;
         int delegateCount = mDelegates.size();
+        int count=0;
         for (int i = 0; i < delegateCount; i++) {
             //查看第几个位置的值：
             AdapterDelegate<T> delegate = mDelegates.valueAt(i);
-            count=+ delegate.ItemCount(t);
+            count+= delegate.ItemCount(t);
         }
         return count;
     }
@@ -85,5 +86,8 @@ public class AdapterDelegateManager<T> {
         } else {
             delegate.onBindViewHolder(items, position, viewHolder);
         }
+    }
+    public int getMangerCount(){
+        return mDelegates.size();
     }
 }
