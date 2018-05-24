@@ -42,9 +42,10 @@ public class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mManager.getItemCount(mData);
+        return mData == null ? 0 : mManager.getItemCount(mData);
     }
-    public T getData(){
+
+    public T getData() {
         return mData;
     }
 

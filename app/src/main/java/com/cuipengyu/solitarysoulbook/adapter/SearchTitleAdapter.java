@@ -7,34 +7,43 @@ import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.AdapterDelegate;
 import com.cuipengyu.solitarysoulbook.base.BaseViewHolder;
 import com.cuipengyu.solitarysoulbook.entity.bean.SearchViewBean;
-import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 
 /**
  * Create by    ： 崔鹏宇
- * Time  is     ： 2018/5/22
+ * Time  is     ： 2018/5/24
  * Email        ： cuipengyusoul@gmail.com
  * Github       ： https://github.com/SolitarySoul
  * Instructions ：
  */
-public class SearchHistoryAdapter extends AdapterDelegate<SearchViewBean> {
+public class SearchTitleAdapter extends AdapterDelegate<SearchViewBean> {
+    private int postion=0;
+
     @Override
     protected boolean isForViewType(SearchViewBean itmes, int position) {
-        return true;
+        return position == 0 || position == postion + 1;
     }
 
     @Override
     protected BaseViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new BaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.search_hisitory_rv_item, parent, false));
+        return new BaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.searchview_titel_item, parent, false));
     }
 
     @Override
     protected void onBindViewHolder(SearchViewBean itmes, int position, BaseViewHolder holder) {
-        int p = position - itmes.getHotWord().getHotSize()-2;
-        holder.setText(R.id.search_hisitory_name, itmes.getHisitoryBean().getSearchName().get(p) + "");
+        if (position == 0 && itmes.getHotWord() != null) {
+            holder.setText(R.id.searchview_text_item, itmes.getHotWord().getTitle());
+        }
+        if (itmes.getHotWord()!= null) {
+            postion = itmes.getHotWord().getHotWords().size();
+        }
+        if (position == postion + 1 && itmes.getHisitoryBean() != null) {
+            holder.setText(R.id.searchview_text_item, itmes.getHisitoryBean().getName());
+        }
     }
 
     @Override
     protected int ItemCount(SearchViewBean items) {
-        return items==null?0:items.getHisitoryBean().getSearchName().size();
+
+        return (items.getHotWord() == null ? 0 : 1) + (items.getHisitoryBean() == null ? 0 : 1);
     }
 }

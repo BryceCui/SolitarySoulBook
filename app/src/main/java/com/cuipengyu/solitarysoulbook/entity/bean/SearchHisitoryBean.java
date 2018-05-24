@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class SearchHisitoryBean {
     private Long id;
-    private String name = "搜索历史";
     private List<String> searchName;
     public String getName() {
+        String name = "搜索历史";
         return name == null ? "" : name;
     }
 
