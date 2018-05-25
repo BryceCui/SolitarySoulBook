@@ -68,14 +68,7 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
         hisitoryBean.setSearchName(strings);
         mSearchViewBean.setHisitoryBean(hisitoryBean);
         mSearchPresenter.onStar();
-        AdapterDelegateManager<SearchViewBean> manager = new AdapterDelegateManager<SearchViewBean>();
-        manager.addDelegate(new SearchTitleAdapter());
-        manager.addDelegate(new SearchHotWordAdapter());
-        manager.addDelegate(new SearchHistoryAdapter());
-        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
-        mRecyclerView.setLayoutManager(flexboxLayoutManager);
-        adapter = new BaseRvAdapter(mSearchViewBean, manager);
-        mRecyclerView.setAdapter(adapter);
+
         mAutomaticBean = new AutomaticBean();
 //        mListPopupWindow.setDropDownGravity(Gravity.CENTER);
 
@@ -109,6 +102,14 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
     @Override
     public void setHotWordData(HotWord hotWordData) {
         mSearchViewBean.setHotWord(hotWordData);
+        AdapterDelegateManager<SearchViewBean> manager = new AdapterDelegateManager<SearchViewBean>();
+        manager.addDelegate(new SearchTitleAdapter());
+        manager.addDelegate(new SearchHotWordAdapter());
+        manager.addDelegate(new SearchHistoryAdapter());
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
+        mRecyclerView.setLayoutManager(flexboxLayoutManager);
+        adapter = new BaseRvAdapter(mSearchViewBean, manager);
+        mRecyclerView.setAdapter(adapter);
 
     }
 
