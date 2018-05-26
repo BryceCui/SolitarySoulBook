@@ -3,6 +3,7 @@ package com.cuipengyu.solitarysoulbook.mvp.presenter;
 import android.util.Log;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
+import com.cuipengyu.solitarysoulbook.entity.bean.AutomaticBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
 import com.cuipengyu.solitarysoulbook.mvp.controller.SearchActivityController;
 import com.cuipengyu.solitarysoulbook.mvp.model.SearchActivityModel;
@@ -39,14 +40,36 @@ public class SearchActivityPresenter implements SearchActivityController.searchP
 
             @Override
             public void onError(String error) {
-                Log.e("SearchActivityPresenter",error);
+                Log.e("SearchActivityPresenter", error);
             }
 
             @Override
             public void onFinish() {
-                Log.e("onFinish","onFinish");
+                Log.e("SearchActivityPresenter", "onFinish");
             }
         });
 
+    }
+
+    @Override
+    public void getAutoMatic(String query) {
+        mSearchModel.getAutoMaticSearch(query, new BaseHttpEntity<AutomaticBean>() {
+            @Override
+            public void onSuccess(AutomaticBean data) {
+                mSearchView.setAutoMaticData(data);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("SearchActivityPresenter", error);
+
+            }
+
+            @Override
+            public void onFinish() {
+                Log.e("SearchActivityPresenter", "onFinish");
+
+            }
+        });
     }
 }
