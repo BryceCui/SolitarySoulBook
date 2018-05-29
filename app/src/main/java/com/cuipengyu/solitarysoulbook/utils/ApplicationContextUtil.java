@@ -30,6 +30,8 @@ public class ApplicationContextUtil extends Application {
     public void onCreate() {
         super.onCreate();
         mApplicationContext = this;
+        DbUtils.initDb();
+        //facebook在游览器中查看本地数据库的框架注册
         Stetho.initializeWithDefaults(this);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.

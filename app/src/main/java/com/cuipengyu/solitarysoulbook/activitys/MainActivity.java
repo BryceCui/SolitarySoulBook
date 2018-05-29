@@ -41,10 +41,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initData() {
-        for (int i = 0; i <2 ; i++) {
-            int j=0;
-            j+=i;
-        }
+
         initFragments();
 
     }
@@ -128,7 +125,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 //点击搜索跳转搜索页面操作
                 Intent intent=new Intent(this,SearchViewActivity.class);
                 startActivity(intent);
-                Toast.makeText(this, "点击了搜索", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
