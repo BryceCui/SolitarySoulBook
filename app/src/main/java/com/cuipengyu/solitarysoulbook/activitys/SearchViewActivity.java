@@ -56,6 +56,8 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
         setSearchCloseListener(this);
         setQueryTextListener(this);
         new SearchActivityPresenter(this);
+        mSearchView.clearFocus();
+
         mTitleItems = new ArrayList<>();
         mTitleItems.add("历史搜索");
         mSearchViewBean = new SearchViewBean();
