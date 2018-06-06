@@ -18,13 +18,14 @@ import java.util.List;
  */
 public class AdapterDelegateManager<T> {
     private SparseArray<AdapterDelegate<T>> mDelegates = new SparseArray<>();
+
     public int getItemCount(T t) {
         int delegateCount = mDelegates.size();
-        int count=0;
+        int count = 0;
         for (int i = 0; i < delegateCount; i++) {
             //查看第几个位置的值：
             AdapterDelegate<T> delegate = mDelegates.valueAt(i);
-            count+= delegate.ItemCount(t);
+            count += delegate.ItemCount(t);
         }
         return count;
     }
@@ -58,6 +59,22 @@ public class AdapterDelegateManager<T> {
         throw new NullPointerException("No AdapterDelegate added that matches position=" + position + " in data source");
     }
 
+    public AdapterDelegateManager<T> removeDelegate(AdapterDelegate<T> delegate) {
+        if (delegate == null) {
+            throw new NullPointerException("for removeDelegate  delegate is null  ");
+        }
+        int indexToRemove = mDelegates.indexOfValue(delegate);
+        if (indexToRemove >= 0) {
+            mDelegates.remove(indexToRemove);
+        }
+        return this;
+    }
+
+    public AdapterDelegateManager<T> removeDelegate(int viewType) {
+        mDelegates.remove(viewType);
+        return this;
+    }
+
     //指定类型时调用获取类型的方法
     public int getViewType(@NonNull AdapterDelegate<T> data) {
         if (data == null) {
@@ -87,7 +104,8 @@ public class AdapterDelegateManager<T> {
             delegate.onBindViewHolder(items, position, viewHolder);
         }
     }
-    public int getMangerCount(){
+
+    public int getMangerCount() {
         return mDelegates.size();
     }
 }

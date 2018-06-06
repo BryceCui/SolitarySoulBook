@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 book_city_iv.setSelected(true);
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
-                mManager.beginTransaction().show(mCityFragment).hide(mSettingFragment).hide(mShelfFragment).commit();
+                    mManager.beginTransaction().show(mCityFragment).hide(mSettingFragment).hide(mShelfFragment).commit();
                 setTitleBar("书城");
                 setRightImage(R.drawable.searchview_bg);
                 break;
@@ -103,7 +103,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 book_city_iv.setSelected(false);
                 my_setting_tv.setSelected(true);
                 my_setting_iv.setSelected(true);
-                mManager.beginTransaction().show(mSettingFragment).hide(mCityFragment).hide(mShelfFragment).commit();
+                    mManager.beginTransaction().show(mSettingFragment).hide(mCityFragment).hide(mShelfFragment).commit();
+
                 setTitleBar("个人中心");
                 setRightImage(0);
                 break;
@@ -123,7 +124,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.base_toolbar_menu:
                 //点击搜索跳转搜索页面操作
-                Intent intent=new Intent(this,SearchViewActivity.class);
+                Intent intent = new Intent(this, SearchViewActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -15,15 +15,13 @@ import org.greenrobot.greendao.annotation.Generated;
 public class UserInforMation {
     @Id
     private Long id;
-    private Long informationid;
     private String userName;
     private String userImage;
     private String signaTrue;
-    @Generated(hash = 131021534)
-    public UserInforMation(Long id, Long informationid, String userName,
-            String userImage, String signaTrue) {
+    @Generated(hash = 420880326)
+    public UserInforMation(Long id, String userName, String userImage,
+            String signaTrue) {
         this.id = id;
-        this.informationid = informationid;
         this.userName = userName;
         this.userImage = userImage;
         this.signaTrue = signaTrue;
@@ -36,12 +34,6 @@ public class UserInforMation {
     }
     public void setId(Long id) {
         this.id = id;
-    }
-    public Long getInformationid() {
-        return this.informationid;
-    }
-    public void setInformationid(Long informationid) {
-        this.informationid = informationid;
     }
     public String getUserName() {
         return this.userName;
@@ -61,4 +53,5 @@ public class UserInforMation {
     public void setSignaTrue(String signaTrue) {
         this.signaTrue = signaTrue;
     }
+ 
 }

@@ -11,29 +11,20 @@ import com.cuipengyu.solitarysoulbook.entity.Constants;
  */
 public class RetrofitHelper {
     private static RetrofitHelper mHelper;
-    private String BASE_URL = "";
-
-    private RetrofitHelper(int dex) {
-        switch (dex) {
-            case 0:
-                BASE_URL = Constants.http_baseUrl;
-                break;
-            default:
-                BASE_URL = Constants.Api_baseUrl;
-                break;
-        }
-    }
+    private static String BASE_URL = "";
 
     private RetrofitHelper() {
         BASE_URL = Constants.Api_baseUrl;
     }
     public static RetrofitHelper getService() {
-        if (mHelper == null) mHelper = new RetrofitHelper();
+        if (mHelper == null)   mHelper = new RetrofitHelper();
+        BASE_URL = Constants.Api_baseUrl;
         return mHelper;
     }
 
     public static RetrofitHelper getService(int index) {
-        if (mHelper == null) mHelper = new RetrofitHelper(index);
+        if (mHelper == null) mHelper = new RetrofitHelper();
+        BASE_URL = Constants.http_baseUrl;
         return mHelper;
     }
 

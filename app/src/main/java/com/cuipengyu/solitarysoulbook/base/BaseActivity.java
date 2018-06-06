@@ -1,5 +1,6 @@
 package com.cuipengyu.solitarysoulbook.base;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.cuipengyu.solitarysoulbook.R;
+import com.cuipengyu.solitarysoulbook.utils.LogUtils;
 import com.cuipengyu.solitarysoulbook.widget.CommonToolbar;
 import com.cuipengyu.solitarysoulbook.widget.CustomDialog;
 
@@ -28,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initHeader();
         initView();
         initData();
+        LogUtils.e(TAG);
     }
 
     //绑定布局文件

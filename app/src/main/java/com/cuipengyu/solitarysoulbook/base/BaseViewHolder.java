@@ -1,5 +1,6 @@
 package com.cuipengyu.solitarysoulbook.base;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,7 +16,13 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cuipengyu.solitarysoulbook.R;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
+import com.cuipengyu.solitarysoulbook.widget.GlideImageLoader;
+import com.youth.banner.Banner;
+
+import java.util.List;
 
 /**
  * Create by    ： 崔鹏宇
@@ -26,9 +33,11 @@ import com.cuipengyu.solitarysoulbook.R;
  */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViewArray;
+    private View itemView;
 
     public BaseViewHolder(View itemView) {
         super(itemView);
+        this.itemView = itemView;
         this.mViewArray = new SparseArray<>();
     }
 
@@ -62,6 +71,22 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageResource(@IdRes int viewId, @DrawableRes int imageResId) {
         ImageView view = getView(viewId);
         view.setImageResource(imageResId);
+        return this;
+    }
+
+    public BaseViewHolder setImageGlide(@IdRes int viewId, String Url, Context context) {
+        ImageView view = getView(viewId);
+        Glide.with(context).load(Url).into(view);
+        return this;
+    }
+    public BaseViewHolder setImageBanner( List<String> iamge) {
+        Banner banner = getView(R.id.banner);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(iamge);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
         return this;
     }
 
@@ -113,5 +138,16 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    @Deprecated
+    public BaseViewHolder setOnClickListener(@IdRes int viewId, View.OnClickListener listener) {
+        View view = getView(viewId);
+        view.setOnClickListener(listener);
+        return this;
+    }
+    @Deprecated
+    public BaseViewHolder setOnItemViewClickListener( View.OnClickListener listener) {
+        itemView.setOnClickListener(listener);
+        return this;
+    }
 
 }

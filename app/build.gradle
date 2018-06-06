@@ -59,5 +59,7 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     //在游览器中可以查看数据库的依赖
     implementation 'com.facebook.stetho:stetho:1.5.0'
+    // 轮播图
+    implementation 'com.youth.banner:banner:1.4.10'
 
 }

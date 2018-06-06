@@ -1,5 +1,8 @@
 package com.cuipengyu.solitarysoulbook.entity.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Create by    ： 崔鹏宇
  * Time  is     ： 2018/5/22
@@ -10,7 +13,16 @@ package com.cuipengyu.solitarysoulbook.entity.bean;
 public class SearchViewBean {
 
     private HotWord mHotWord;
-    private SearchHisitoryBean mHisitoryBean;
+    private List<UserHisitoryBean> mHisitoryBean;
+    private AutomaticBean automaticBean;
+
+    public AutomaticBean getAutomaticBean() {
+        return automaticBean;
+    }
+
+    public void setAutomaticBean(AutomaticBean automaticBean) {
+        this.automaticBean = automaticBean;
+    }
 
     public HotWord getHotWord() {
         return mHotWord;
@@ -20,11 +32,20 @@ public class SearchViewBean {
         mHotWord = hotWord;
     }
 
-    public SearchHisitoryBean getHisitoryBean() {
+    public HotWord getmHotWord() {
+        return mHotWord;
+    }
+
+    public void setmHotWord(HotWord mHotWord) {
+        this.mHotWord = mHotWord;
+    }
+
+    public List<UserHisitoryBean> getmHisitoryBean() {
+        if (mHisitoryBean == null) return new ArrayList<>();
         return mHisitoryBean;
     }
 
-    public void setHisitoryBean(SearchHisitoryBean hisitoryBean) {
-        mHisitoryBean = hisitoryBean;
+    public void setmHisitoryBean(List<UserHisitoryBean> mHisitoryBean) {
+        this.mHisitoryBean = mHisitoryBean;
     }
 }
