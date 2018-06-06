@@ -2,6 +2,9 @@ package com.cuipengyu.solitarysoulbook.entity.httphelper;
 
 
 import com.cuipengyu.solitarysoulbook.entity.bean.AutomaticBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookCityRecommendBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookCitySpread;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
 
@@ -52,4 +55,24 @@ public interface RetrofitService {
      */
     @GET("/book/auto-complete")
     Single<AutomaticBean> getAutoMaticSearch(@Query("query") String query);
+
+    /**
+     * 书籍查询
+     *
+     * @param query:作者名或者书名
+     * @return
+     */
+    @GET("/book/fuzzy-search")
+    Single<BookDetailsBean> getSearchBookPackage(@Query("query") String query);
+
+    @GET("spread")
+    Observable<BookCitySpread> getSpread();
+
+    /**
+     * 推荐书籍
+     * @return
+     */
+    @GET("/book/recommend")
+    Observable<BookCityRecommendBean> getRecommendBookPackage();
+
 }

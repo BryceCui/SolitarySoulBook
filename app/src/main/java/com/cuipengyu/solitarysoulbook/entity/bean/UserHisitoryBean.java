@@ -3,6 +3,7 @@ package com.cuipengyu.solitarysoulbook.entity.bean;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * Create by    ： 崔鹏宇
@@ -18,6 +19,13 @@ public class UserHisitoryBean {
     private Long hisitoryid;
     private String name;
     private String bookUrl;
+    @Transient
+    private int Type=0x001;
+
+    public int getType() {
+        return Type;
+    }
+
     @Generated(hash = 2096388132)
     public UserHisitoryBean(Long id, Long hisitoryid, String name, String bookUrl) {
         this.id = id;

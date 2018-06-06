@@ -33,4 +33,6 @@ public class Constants {
      */
     public static final String Api_baseUrl = "http://api.zhuishushenqi.com/";
     public static final String http_baseUrl = "http://www.zhuishushenqi.com/";
+    public static final String IMG_BASE_URL = "http://statics.zhuishushenqi.com";
+    public static String USER_NAME="";
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.BookDetailsActivity">
+
+    <include layout="@layout/toolbar_common" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/bookDetails_imag"
+            android:layout_width="140px"
+            android:layout_height="200px"
+            android:background="@drawable/shap_radius_5_bg" />
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/bookName_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/bookDetails_imag"
+            android:text="书名：" />
+
+        <TextView
+            android:id="@+id/bookName_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/bookName_tv_1"
+            android:text="标题"
+            android:textSize="15sp" />
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/bookCat_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookName_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/bookDetails_imag"
+            android:text="类型：" />
+
+        <TextView
+            android:id="@+id/bookCat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookName_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/bookCat_tv_1"
+            android:text="类型" />
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/book_author_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookCat_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/bookDetails_imag"
+            android:text="作者：" />
+
+        <TextView
+            android:id="@+id/book_author_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookCat_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/book_author_tv_1"
+            android:text="作者" />
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/book_lastChapter_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/book_author_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/bookDetails_imag"
+            android:text="最新章节：" />
+
+        <TextView
+            android:id="@+id/book_lastChapter_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/book_author_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/book_lastChapter_tv_1"
+            android:text="最新章节" />
+
+        <TextView
+            android:textColor="@color/red"
+            android:id="@+id/book_wordCount_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/book_lastChapter_tv_1"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/bookDetails_imag"
+            android:text="字数：" />
+
+        <TextView
+            android:id="@+id/book_wordCount_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/book_lastChapter_tv"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/book_wordCount_tv_1"
+            android:text="字数" />
+
+    </RelativeLayout>
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/red"
+        android:id="@+id/book_shortIntro_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="简介：" />
+
+    <Button
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/book_toRead_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_btn_red_bg"
+        android:text="开始阅读" />
+</LinearLayout>

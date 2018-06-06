@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/book_city_recom_imag"
+        android:layout_width="140px"
+        android:layout_height="200px"
+        android:background="@drawable/shap_radius_5_bg"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/bookrecom_bookName_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/book_city_recom_imag"
+        android:text="书名："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookrecom_bookName_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/bookrecom_bookName_tv_1"
+        android:text="标题"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/bookrecom_bookCat_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_bookName_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_city_recom_imag"
+        android:text="类型："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookrecom_bookCat_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_bookName_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookrecom_bookCat_tv_1"
+        android:text="类型" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_author_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_bookCat_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_city_recom_imag"
+        android:text="作者："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_author_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_bookCat_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookrecom_book_author_tv_1"
+        android:text="作者" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_lastChapter_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_book_author_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_city_recom_imag"
+        android:text="最新章节："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_lastChapter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_book_author_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookrecom_book_lastChapter_tv_1"
+        android:text="最新章节" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_wordCount_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_book_lastChapter_tv_1"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_city_recom_imag"
+        android:text="总章节："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookrecom_book_wordCount_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookrecom_book_lastChapter_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookrecom_book_wordCount_tv_1"
+        android:text="总章节" />
+</RelativeLayout>

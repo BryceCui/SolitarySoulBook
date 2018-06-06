@@ -1,13 +1,18 @@
 package com.cuipengyu.solitarysoulbook.entity.db;
 
+import java.util.List;
+import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
+import org.greenrobot.greendao.internal.SqlUtils;
 import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
+
+import com.cuipengyu.solitarysoulbook.entity.bean.UserInforMation;
 
 import com.cuipengyu.solitarysoulbook.entity.bean.UserBean;
 
@@ -27,6 +32,7 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property PassWord = new Property(2, String.class, "passWord", false, "PASS_WORD");
+        public final static Property Informationid = new Property(3, Long.class, "informationid", false, "INFORMATIONID");
     }
 
     private DaoSession daoSession;
@@ -47,7 +53,8 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"USER_BEAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT NOT NULL UNIQUE ," + // 1: name
-                "\"PASS_WORD\" TEXT NOT NULL );"); // 2: passWord
+                "\"PASS_WORD\" TEXT NOT NULL ," + // 2: passWord
+                "\"INFORMATIONID\" INTEGER);"); // 3: informationid
     }
 
     /** Drops the underlying database table. */
@@ -66,6 +73,11 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         }
         stmt.bindString(2, entity.getName());
         stmt.bindString(3, entity.getPassWord());
+ 
+        Long informationid = entity.getInformationid();
+        if (informationid != null) {
+            stmt.bindLong(4, informationid);
+        }
     }
 
     @Override
@@ -78,6 +90,11 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         }
         stmt.bindString(2, entity.getName());
         stmt.bindString(3, entity.getPassWord());
+ 
+        Long informationid = entity.getInformationid();
+        if (informationid != null) {
+            stmt.bindLong(4, informationid);
+        }
     }
 
     @Override
@@ -96,7 +113,8 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         UserBean entity = new UserBean( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // name
-            cursor.getString(offset + 2) // passWord
+            cursor.getString(offset + 2), // passWord
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3) // informationid
         );
         return entity;
     }
@@ -106,6 +124,7 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.getString(offset + 1));
         entity.setPassWord(cursor.getString(offset + 2));
+        entity.setInformationid(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
      }
     
     @Override
@@ -133,4 +152,95 @@ public class UserBeanDao extends AbstractDao<UserBean, Long> {
         return true;
     }
     
+    private String selectDeep;
+
+    protected String getSelectDeep() {
+        if (selectDeep == null) {
+            StringBuilder builder = new StringBuilder("SELECT ");
+            SqlUtils.appendColumns(builder, "T", getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T0", daoSession.getUserInforMationDao().getAllColumns());
+            builder.append(" FROM USER_BEAN T");
+            builder.append(" LEFT JOIN USER_INFOR_MATION T0 ON T.\"INFORMATIONID\"=T0.\"_id\"");
+            builder.append(' ');
+            selectDeep = builder.toString();
+        }
+        return selectDeep;
+    }
+    
+    protected UserBean loadCurrentDeep(Cursor cursor, boolean lock) {
+        UserBean entity = loadCurrent(cursor, 0, lock);
+        int offset = getAllColumns().length;
+
+        UserInforMation userInforMations = loadCurrentOther(daoSession.getUserInforMationDao(), cursor, offset);
+        entity.setUserInforMations(userInforMations);
+
+        return entity;    
+    }
+
+    public UserBean loadDeep(Long key) {
+        assertSinglePk();
+        if (key == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder(getSelectDeep());
+        builder.append("WHERE ");
+        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
+        String sql = builder.toString();
+        
+        String[] keyArray = new String[] { key.toString() };
+        Cursor cursor = db.rawQuery(sql, keyArray);
+        
+        try {
+            boolean available = cursor.moveToFirst();
+            if (!available) {
+                return null;
+            } else if (!cursor.isLast()) {
+                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
+            }
+            return loadCurrentDeep(cursor, true);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
+    public List<UserBean> loadAllDeepFromCursor(Cursor cursor) {
+        int count = cursor.getCount();
+        List<UserBean> list = new ArrayList<UserBean>(count);
+        
+        if (cursor.moveToFirst()) {
+            if (identityScope != null) {
+                identityScope.lock();
+                identityScope.reserveRoom(count);
+            }
+            try {
+                do {
+                    list.add(loadCurrentDeep(cursor, false));
+                } while (cursor.moveToNext());
+            } finally {
+                if (identityScope != null) {
+                    identityScope.unlock();
+                }
+            }
+        }
+        return list;
+    }
+    
+    protected List<UserBean> loadDeepAllAndCloseCursor(Cursor cursor) {
+        try {
+            return loadAllDeepFromCursor(cursor);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List<UserBean> queryDeep(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
+        return loadDeepAllAndCloseCursor(cursor);
+    }
+ 
 }

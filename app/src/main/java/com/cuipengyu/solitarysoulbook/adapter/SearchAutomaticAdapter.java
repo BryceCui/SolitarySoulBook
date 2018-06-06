@@ -3,11 +3,19 @@ package com.cuipengyu.solitarysoulbook.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.cuipengyu.solitarysoulbook.R;
-import com.cuipengyu.solitarysoulbook.entity.bean.AutomaticBean;
+import com.cuipengyu.solitarysoulbook.base.AdapterDelegate;
+import com.cuipengyu.solitarysoulbook.base.BaseViewHolder;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
+import com.cuipengyu.solitarysoulbook.entity.bean.EvenBusEntityBook;
+import com.cuipengyu.solitarysoulbook.entity.bean.SearchViewBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.UserBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.UserHisitoryBean;
+import com.cuipengyu.solitarysoulbook.entity.db.UserBeanDao;
+import com.cuipengyu.solitarysoulbook.utils.DbUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Create by    ： 崔鹏宇
@@ -16,49 +24,37 @@ import com.cuipengyu.solitarysoulbook.entity.bean.AutomaticBean;
  * Github       ： https://github.com/SolitarySoul
  * Instructions ： listpopupWindow 适配器
  */
-public class SearchAutomaticAdapter extends BaseAdapter {
-    private AutomaticBean mData;
+public class SearchAutomaticAdapter extends AdapterDelegate<SearchViewBean> {
 
-    public SearchAutomaticAdapter(AutomaticBean automaticBean) {
-        this.mData = automaticBean;
+    @Override
+    protected boolean isForViewType(SearchViewBean itmes, int position) {
+        return itmes.getAutomaticBean() != null;
     }
 
     @Override
-    public int getCount() {
-        return mData==null?0:mData.getKeywords().size();
+    protected BaseViewHolder onCreateViewHolder(ViewGroup parent) {
+        return new BaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.searchview_rv_automatic, parent, false));
+
     }
 
     @Override
-    public Object getItem(int position) {
-        return mData.getKeywords().get(position);
+    protected void onBindViewHolder(final SearchViewBean itmes, final int position, BaseViewHolder holder) {
+        holder.setText(R.id.automatic_tv, itmes.getAutomaticBean().getKeywords().get(position));
+        holder.setOnClickListener(R.id.automatic_tv, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserBean userBean = DbUtils.getSession().getUserBeanDao().queryBuilder().where(UserBeanDao.Properties.Name.eq(Constants.USER_NAME)).unique();
+                UserHisitoryBean userHisitoryBean = new UserHisitoryBean();
+                userHisitoryBean.setHisitoryid(userBean.getId());
+                userHisitoryBean.setName(itmes.getAutomaticBean().getKeywords().get(position));
+                DbUtils.getSession().getUserHisitoryBeanDao().insertOrReplace(userHisitoryBean);
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getAutomaticBean().getKeywords().get(position)));
+            }
+        });
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        PopupViewHolder viewHolder = null;
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.searchview_popupwindow_item, null);
-            viewHolder = new PopupViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (PopupViewHolder) convertView.getTag();
-        }
-        viewHolder.search_popup_item_tv.setText(mData.getKeywords().get(position));
-        return convertView;
-    }
-
-    class PopupViewHolder {
-        TextView search_popup_item_tv;
-
-        PopupViewHolder(View rootView) {
-            search_popup_item_tv = (TextView) rootView.findViewById(R.id.search_popup_item_tv);
-        }
-
+    protected int ItemCount(SearchViewBean items) {
+        return items.getAutomaticBean() != null ? items.getAutomaticBean().getKeywords().size() : 0;
     }
 }

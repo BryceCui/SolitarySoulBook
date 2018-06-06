@@ -4,6 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToMany;
+import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Unique;
 
 import java.util.List;
@@ -11,8 +12,8 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.cuipengyu.solitarysoulbook.entity.db.DaoSession;
 import com.cuipengyu.solitarysoulbook.entity.db.UserShelfBeanDao;
-import com.cuipengyu.solitarysoulbook.entity.db.UserInforMationDao;
 import com.cuipengyu.solitarysoulbook.entity.db.UserHisitoryBeanDao;
+import com.cuipengyu.solitarysoulbook.entity.db.UserInforMationDao;
 import com.cuipengyu.solitarysoulbook.entity.db.UserBeanDao;
 
 /**
@@ -31,10 +32,11 @@ public class UserBean {
     private String name;
     @NotNull
     private String passWord;
+    private Long informationid;
     @ToMany(referencedJoinProperty = "hisitoryid")
     private List<UserHisitoryBean> userHisitoryBeans;
-    @ToMany(referencedJoinProperty = "informationid")
-    private List<UserInforMation> userInforMations;
+    @ToOne(joinProperty = "informationid")
+    private UserInforMation userInforMations;
     @ToMany(referencedJoinProperty = "shelfid")
     private List<UserShelfBean> userShelfBeans;
     /** Used to resolve relations */
@@ -43,11 +45,13 @@ public class UserBean {
     /** Used for active entity operations. */
     @Generated(hash = 83707551)
     private transient UserBeanDao myDao;
-    @Generated(hash = 1175392014)
-    public UserBean(Long id, @NotNull String name, @NotNull String passWord) {
+    @Generated(hash = 936271475)
+    public UserBean(Long id, @NotNull String name, @NotNull String passWord,
+            Long informationid) {
         this.id = id;
         this.name = name;
         this.passWord = passWord;
+        this.informationid = informationid;
     }
     @Generated(hash = 1203313951)
     public UserBean() {
@@ -69,6 +73,43 @@ public class UserBean {
     }
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+    public Long getInformationid() {
+        return this.informationid;
+    }
+    public void setInformationid(Long informationid) {
+        this.informationid = informationid;
+    }
+    @Generated(hash = 1983108707)
+    private transient Long userInforMations__resolvedKey;
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 603590305)
+    public UserInforMation getUserInforMations() {
+        Long __key = this.informationid;
+        if (userInforMations__resolvedKey == null
+                || !userInforMations__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserInforMationDao targetDao = daoSession.getUserInforMationDao();
+            UserInforMation userInforMationsNew = targetDao.load(__key);
+            synchronized (this) {
+                userInforMations = userInforMationsNew;
+                userInforMations__resolvedKey = __key;
+            }
+        }
+        return userInforMations;
+    }
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1322362075)
+    public void setUserInforMations(UserInforMation userInforMations) {
+        synchronized (this) {
+            this.userInforMations = userInforMations;
+            informationid = userInforMations == null ? null
+                    : userInforMations.getId();
+            userInforMations__resolvedKey = informationid;
+        }
     }
     /**
      * To-many relationship, resolved on first access (and after reset).
@@ -96,33 +137,6 @@ public class UserBean {
     @Generated(hash = 1887793806)
     public synchronized void resetUserHisitoryBeans() {
         userHisitoryBeans = null;
-    }
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 185649761)
-    public List<UserInforMation> getUserInforMations() {
-        if (userInforMations == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            UserInforMationDao targetDao = daoSession.getUserInforMationDao();
-            List<UserInforMation> userInforMationsNew = targetDao
-                    ._queryUserBean_UserInforMations(id);
-            synchronized (this) {
-                if (userInforMations == null) {
-                    userInforMations = userInforMationsNew;
-                }
-            }
-        }
-        return userInforMations;
-    }
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 95418115)
-    public synchronized void resetUserInforMations() {
-        userInforMations = null;
     }
     /**
      * To-many relationship, resolved on first access (and after reset).
@@ -190,4 +204,5 @@ public class UserBean {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getUserBeanDao() : null;
     }
+
 }

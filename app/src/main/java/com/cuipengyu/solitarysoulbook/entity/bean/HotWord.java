@@ -71,6 +71,11 @@ public class HotWord {
 
         private String word;
         private String book;
+        private int Type=0x000;
+
+        public int getType() {
+            return Type;
+        }
 
         public String getWord() {
             return word;

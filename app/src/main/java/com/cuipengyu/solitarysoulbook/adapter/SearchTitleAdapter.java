@@ -16,11 +16,11 @@ import com.cuipengyu.solitarysoulbook.entity.bean.SearchViewBean;
  * Instructions ：
  */
 public class SearchTitleAdapter extends AdapterDelegate<SearchViewBean> {
-    private int postion=0;
+    private int postion = 0;
 
     @Override
     protected boolean isForViewType(SearchViewBean itmes, int position) {
-        return position == 0 || position == postion + 1;
+        return (position == 0) || position == postion + 1;
     }
 
     @Override
@@ -31,19 +31,19 @@ public class SearchTitleAdapter extends AdapterDelegate<SearchViewBean> {
     @Override
     protected void onBindViewHolder(SearchViewBean itmes, int position, BaseViewHolder holder) {
         if (position == 0 && itmes.getHotWord() != null) {
-            holder.setText(R.id.searchview_text_item, itmes.getHotWord().getTitle());
+            holder.setText(R.id.searchview_text_item, "热门搜索");
         }
-        if (itmes.getHotWord()!= null) {
+        if (itmes.getHotWord() != null) {
             postion = itmes.getHotWord().getHotWords().size();
         }
-        if (position == postion + 1 && itmes.getHisitoryBean() != null) {
-            holder.setText(R.id.searchview_text_item, itmes.getHisitoryBean().getName());
+        if (position == postion + 1 && itmes.getmHisitoryBean().size() >0) {
+            holder.setText(R.id.searchview_text_item, "历史记录");
         }
     }
 
     @Override
     protected int ItemCount(SearchViewBean items) {
 
-        return (items.getHotWord() == null ? 0 : 1) + (items.getHisitoryBean() == null ? 0 : 1);
+        return (items.getHotWord() == null ? 0 : 1) + (items.getmHisitoryBean() == null ? 0 : 1);
     }
 }
