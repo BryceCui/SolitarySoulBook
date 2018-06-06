@@ -43,24 +43,23 @@ public class BookCityRecomAdapter extends AdapterDelegate<BookCityBean> {
     @Override
     protected void onBindViewHolder(final BookCityBean itmes, final int position, BaseViewHolder holder) {
         final int p = position - itmes.getStrings().size() - 1;
-        Log.e("position-----", position + "");
-        Log.e("p-----", p + "");
         holder.setText(R.id.bookrecom_bookName_tv, itmes.getRecommendBean().getBooks().get(p).getTitle());
         holder.setText(R.id.bookrecom_bookCat_tv, itmes.getRecommendBean().getBooks().get(p).getMajorCate());
         holder.setText(R.id.bookrecom_book_author_tv, itmes.getRecommendBean().getBooks().get(p).getAuthor());
         holder.setText(R.id.bookrecom_book_lastChapter_tv, itmes.getRecommendBean().getBooks().get(p).getLastChapter());
         holder.setText(R.id.bookrecom_book_wordCount_tv, itmes.getRecommendBean().getBooks().get(p).getChaptersCount() + "");
         holder.setImageGlide(R.id.book_city_recom_imag, Constants.IMG_BASE_URL + itmes.getRecommendBean().getBooks().get(p).getCover(), context);
-        holder.setOnItemViewClickListener(new View.OnClickListener() {
+        holder.setOnClickListener(R.id.book_city_layout_recom, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new EvenBusEntityBook(itmes.getRecommendBean().getBooks().get(p).getTitle()));
             }
         });
+
     }
 
     @Override
     protected int ItemCount(BookCityBean items) {
-        return items.getRecommendBean().getBooks().size();
+        return items.getRecommendBean().getBooks() == null ? 0 : items.getRecommendBean().getBooks().size();
     }
 }

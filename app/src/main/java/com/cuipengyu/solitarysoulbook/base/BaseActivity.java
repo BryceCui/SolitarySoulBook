@@ -1,6 +1,5 @@
 package com.cuipengyu.solitarysoulbook.base;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
