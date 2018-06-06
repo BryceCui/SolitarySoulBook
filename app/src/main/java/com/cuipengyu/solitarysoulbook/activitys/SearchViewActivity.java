@@ -46,6 +46,12 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
     private boolean isAutomatic = true;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public int bindViewLayout() {
         return R.layout.activity_search_view;
     }
@@ -58,7 +64,6 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
 
     @Override
     public void initData() {
-        EventBus.getDefault().register(this);
         initSearch();
         setLeftImage();
         setLeftBarBack();

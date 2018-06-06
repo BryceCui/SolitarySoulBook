@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Create by    ： 崔鹏宇
  * Time  is     ： 2018/4/8

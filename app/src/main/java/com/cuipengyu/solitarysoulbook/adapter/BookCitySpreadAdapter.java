@@ -21,11 +21,11 @@ import java.util.List;
  * Instructions ：
  */
 public class BookCitySpreadAdapter extends AdapterDelegate<BookCityBean> {
-    private List<String> url = new ArrayList<>();
     @Override
     protected boolean isForViewType(BookCityBean itmes, int position) {
-        return position==0;
+        return position == 0;
     }
+
     @Override
     protected BaseViewHolder onCreateViewHolder(ViewGroup parent) {
         return new BaseViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.book_city_spread_layout, parent, false));
@@ -34,14 +34,16 @@ public class BookCitySpreadAdapter extends AdapterDelegate<BookCityBean> {
 
     @Override
     protected void onBindViewHolder(BookCityBean itmes, int position, BaseViewHolder holder) {
+        List<String> url = new ArrayList<>();
         int size = itmes.getCitySpread().getData().size();
-        for (int i = 0; i <size ; i++) {
+        for (int i = 0; i < size; i++) {
             url.add(itmes.getCitySpread().getData().get(i).getImg());
         }
         holder.setImageBanner(url);
     }
+
     @Override
     protected int ItemCount(BookCityBean items) {
-        return 1;
+        return items.getCitySpread().getData()==null?0:1;
     }
 }
