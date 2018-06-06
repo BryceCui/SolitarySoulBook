@@ -44,6 +44,6 @@ public class BookCitySpreadAdapter extends AdapterDelegate<BookCityBean> {
 
     @Override
     protected int ItemCount(BookCityBean items) {
-        return items.getCitySpread().getData()==null?0:1;
+        return items.getCitySpread()==null?0:1;
     }
 }

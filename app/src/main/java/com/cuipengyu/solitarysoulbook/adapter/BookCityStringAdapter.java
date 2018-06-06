@@ -1,6 +1,7 @@
 package com.cuipengyu.solitarysoulbook.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.cuipengyu.solitarysoulbook.R;
@@ -29,6 +30,12 @@ public class BookCityStringAdapter extends AdapterDelegate<BookCityBean> {
     @Override
     protected void onBindViewHolder(BookCityBean itmes, int position, BaseViewHolder holder) {
         holder.setText(R.id.book_city_string_tv, itmes.getStrings().get(position-1));
+        holder.setOnClickListener(R.id.book_city_string_tv, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -47,7 +47,7 @@ public class SearchHistoryAdapter extends AdapterDelegate<SearchViewBean> {
 //                userHisitoryBean.setHisitoryid(userBean.getId());
 //                userHisitoryBean.setName(itmes.getAutomaticBean().getKeywords().get(position));
 //                DbUtils.getSession().getUserHisitoryBeanDao().insertOrReplace(userHisitoryBean);
-                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getmHisitoryBean().get(p).getName()));
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getmHisitoryBean().get(p).getName(),0));
             }
         });
     }

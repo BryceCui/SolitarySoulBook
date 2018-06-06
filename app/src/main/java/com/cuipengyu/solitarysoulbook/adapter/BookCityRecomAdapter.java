@@ -52,7 +52,7 @@ public class BookCityRecomAdapter extends AdapterDelegate<BookCityBean> {
         holder.setOnClickListener(R.id.book_city_layout_recom, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getRecommendBean().getBooks().get(p).getTitle()));
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getRecommendBean().getBooks().get(p).getTitle(),1));
             }
         });
 
@@ -60,6 +60,6 @@ public class BookCityRecomAdapter extends AdapterDelegate<BookCityBean> {
 
     @Override
     protected int ItemCount(BookCityBean items) {
-        return items.getRecommendBean().getBooks() == null ? 0 : items.getRecommendBean().getBooks().size();
+        return items.getRecommendBean() == null ? 0 : items.getRecommendBean().getBooks().size();
     }
 }
