@@ -1,11 +1,9 @@
 package com.cuipengyu.solitarysoulbook.fragments;
 
-import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.cuipengyu.solitarysoulbook.R;
-import com.cuipengyu.solitarysoulbook.activitys.BookDetailsActivity;
 import com.cuipengyu.solitarysoulbook.adapter.BookCityAdapter;
 import com.cuipengyu.solitarysoulbook.adapter.BookCityRecomAdapter;
 import com.cuipengyu.solitarysoulbook.adapter.BookCitySpreadAdapter;
@@ -15,13 +13,9 @@ import com.cuipengyu.solitarysoulbook.base.BaseFragment;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCityBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCityRecommendBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCitySpread;
-import com.cuipengyu.solitarysoulbook.entity.bean.EvenBusEntityBook;
 import com.cuipengyu.solitarysoulbook.mvp.controller.BookCityController;
 import com.cuipengyu.solitarysoulbook.mvp.presenter.BookCityPresenter;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.cuipengyu.solitarysoulbook.widget.RvItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +60,7 @@ public class BookCityFragment extends BaseFragment implements BookCityController
         manager.addDelegate(0, new BookCitySpreadAdapter());
         manager.addDelegate(1, new BookCityStringAdapter());
         manager.addDelegate(2, new BookCityRecomAdapter(getActivity()));
+        book_city_rv.addItemDecoration(new RvItemDecoration(5));
         book_city_rv.setLayoutManager(new GridLayoutManager(getActivity(), 6, GridLayoutManager.VERTICAL, false));
         book_city_rv.setAdapter(new BookCityAdapter(cityBean, manager));
     }

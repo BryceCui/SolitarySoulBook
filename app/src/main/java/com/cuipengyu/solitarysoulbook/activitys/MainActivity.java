@@ -142,10 +142,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPostBook(EvenBusEntityBook entityBook) {
-        Intent intent = new Intent(this, BookDetailsActivity.class);
-        intent.putExtra("bookName", entityBook.getBookName());
-        if (entityBook.getBookUrl() != null) intent.putExtra("bookUrl", entityBook.getBookUrl());
-        startActivity(intent);
+        if (entityBook.getType() == 1) {
+            Intent intent = new Intent(this, BookDetailsActivity.class);
+            intent.putExtra("bookName", entityBook.getBookName());
+            if (entityBook.getBookUrl() != null) {
+                intent.putExtra("bookUrl", entityBook.getBookUrl());
+                startActivity(intent);
+            }
+        }
     }
 
 

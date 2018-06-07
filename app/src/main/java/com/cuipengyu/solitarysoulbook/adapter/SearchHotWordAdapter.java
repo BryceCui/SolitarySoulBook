@@ -54,7 +54,7 @@ public class SearchHotWordAdapter extends AdapterDelegate<SearchViewBean> {
                 userHisitoryBean.setName(itmes.getHotWord().getHotWords().get(position - 1));
                 userHisitoryBean.setBookUrl(itmes.getHotWord().getNewHotWords().get(position-1).getBook());
                 DbUtils.getSession().getUserHisitoryBeanDao().insertOrReplace(userHisitoryBean);
-                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getHotWord().getHotWords().get(position - 1),itmes.getHotWord().getNewHotWords().get(position-1).getBook()));
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getHotWord().getHotWords().get(position - 1),itmes.getHotWord().getNewHotWords().get(position-1).getBook(),0));
             }
         });
     }

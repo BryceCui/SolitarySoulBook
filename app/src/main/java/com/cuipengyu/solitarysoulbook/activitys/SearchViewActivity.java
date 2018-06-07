@@ -152,11 +152,13 @@ public class SearchViewActivity extends BaseActivity implements SearchView.OnClo
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPostBook(EvenBusEntityBook entityBook) {
-        Intent intent = new Intent(this, BookDetailsActivity.class);
-        intent.putExtra("bookName", entityBook.getBookName());
-        if (entityBook.getBookUrl() != null) intent.putExtra("bookUrl", entityBook.getBookUrl());
-        startActivity(intent);
-        finish();
+        if (entityBook.getType()==0){
+            Intent intent = new Intent(this, BookDetailsActivity.class);
+            intent.putExtra("bookName", entityBook.getBookName());
+            if (entityBook.getBookUrl() != null) intent.putExtra("bookUrl", entityBook.getBookUrl());
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override

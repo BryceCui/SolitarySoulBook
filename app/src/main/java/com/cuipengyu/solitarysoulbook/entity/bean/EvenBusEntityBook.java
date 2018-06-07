@@ -10,6 +10,7 @@ package com.cuipengyu.solitarysoulbook.entity.bean;
 public class EvenBusEntityBook {
     private String bookName;
     private String bookUrl;
+    private int type;
 
     public EvenBusEntityBook(String bookName) {
         this.bookName = bookName;
@@ -18,6 +19,20 @@ public class EvenBusEntityBook {
     public EvenBusEntityBook(String bookName, String bookUrl) {
         this.bookName = bookName;
         this.bookUrl = bookUrl;
+    }
+
+    public EvenBusEntityBook(String bookName, String bookUrl, int type) {
+        this.bookName = bookName;
+        this.bookUrl = bookUrl;
+        this.type = type;
+    }
+    public EvenBusEntityBook(String bookName, int type) {
+        this.bookName = bookName;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public String getBookUrl() {

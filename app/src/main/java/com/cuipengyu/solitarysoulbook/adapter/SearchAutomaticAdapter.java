@@ -48,7 +48,7 @@ public class SearchAutomaticAdapter extends AdapterDelegate<SearchViewBean> {
                 userHisitoryBean.setHisitoryid(userBean.getId());
                 userHisitoryBean.setName(itmes.getAutomaticBean().getKeywords().get(position));
                 DbUtils.getSession().getUserHisitoryBeanDao().insertOrReplace(userHisitoryBean);
-                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getAutomaticBean().getKeywords().get(position)));
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getAutomaticBean().getKeywords().get(position),0));
             }
         });
     }
