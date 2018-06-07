@@ -72,7 +72,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDeTailsActi
 
     @Override
     public void setidBook(BookDetailsId data) {
-        bookName=data.getTitle();
+        bookName = data.getTitle();
         bookName_tv.setText(bookName);
         bookCat_tv.setText(data.getCat());
         book_author_tv.setText(data.getAuthor());
@@ -80,7 +80,7 @@ public class BookDetailsActivity extends BaseActivity implements BookDeTailsActi
         book_wordCount_tv.setText(String.valueOf(data.getWordCount()));
         book_shortIntro_tv.setText(data.getLongIntro());
         bookId = data.get_id();
-        bookImage=data.getCover();
+        bookImage = data.getCover();
         Glide.with(this).load(Constants.IMG_BASE_URL + data.getCover()).into(bookDetails_imag);
     }
 
@@ -95,9 +95,10 @@ public class BookDetailsActivity extends BaseActivity implements BookDeTailsActi
             case R.id.book_toRead_btn:
                 Intent intent = new Intent(this, ReadActivity.class);
                 intent.putExtra("bookID", bookId);
-                intent.putExtra("bookName",bookName);
-                intent.putExtra("bookImage",bookImage);
+                intent.putExtra("bookName", bookName);
+                intent.putExtra("bookImage", bookImage);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

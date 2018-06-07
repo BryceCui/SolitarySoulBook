@@ -25,10 +25,12 @@ public class BookDeTailsPresenter implements BookDeTailsActivityController.BookD
 
     @Override
     public void setBookName(String bookName) {
+        mView.LoadingShow();
         model.getBook(bookName, new BaseHttpEntity<BookDetailsBean>() {
             @Override
             public void onSuccess(BookDetailsBean data) {
                 mView.setBookData(data);
+mView.LoadingDismiss();
             }
 
             @Override
@@ -45,10 +47,13 @@ public class BookDeTailsPresenter implements BookDeTailsActivityController.BookD
 
     @Override
     public void setidBook(String ID) {
+        mView.LoadingShow();
+
         model.getidBook(ID, new BaseHttpEntity<BookDetailsId>() {
             @Override
             public void onSuccess(BookDetailsId data) {
                 mView.setidBook(data);
+                mView.LoadingDismiss();
             }
 
             @Override

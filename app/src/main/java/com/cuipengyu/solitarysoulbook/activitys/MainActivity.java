@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.BaseActivity;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 import com.cuipengyu.solitarysoulbook.entity.bean.EvenBusEntityBook;
 import com.cuipengyu.solitarysoulbook.fragments.BookCityFragment;
 import com.cuipengyu.solitarysoulbook.fragments.BookShelfFragment;
@@ -91,6 +92,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 book_city_iv.setSelected(false);
                 my_setting_tv.setSelected(false);
                 my_setting_iv.setSelected(false);
+//                mManager.beginTransaction().hide(mCityFragment).hide(mSettingFragment).replace(R.id.main_fl, mShelfFragment, "mShelfFragment").commit();
                 mManager.beginTransaction().show(mShelfFragment).hide(mSettingFragment).hide(mCityFragment).commit();
                 setTitleBar("书架");
                 setRightImage(R.drawable.searchview_bg);
@@ -148,6 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (entityBook.getBookUrl() != null) {
                 intent.putExtra("bookUrl", entityBook.getBookUrl());
                 startActivity(intent);
+//                finish();
             }
         }
         if (entityBook.getType() == 2) {
@@ -157,9 +160,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent(this, RankingActivity.class);
                 startActivity(intent);
             } else {
-
             }
         }
+        if (entityBook.getType() == Constants.INTENT_BOOKRANKINGDETATILS) {
+            Intent intent = new Intent(this, BookDetailsActivity.class);
+            intent.putExtra("bookUrl", entityBook.getBookName());
+            startActivity(intent);
+//            finish();
+        }
+
     }
 
 

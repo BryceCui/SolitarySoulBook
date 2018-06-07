@@ -40,5 +40,6 @@ public class Constants {
     public static final int INTENT_BOOKURL=0;//这是传递书籍名称和书籍id的类型
     public static final int INTENT_BOOKFIACTION=2;//这是分类排行和精选类型
     public static final int INTENT_BOOKRANKING=3;//排行和精选
-    public static final int INTENT_BOOKRANKINGDETATILS=4;//排行和精选
+    public static final int INTENT_BOOKRANKINGDETATILS=4;//排行和精选d
+    public static final int INTENT_BOOKSHELFREFESH=-1;//排行和精选d
 }

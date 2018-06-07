@@ -1,5 +1,8 @@
 package com.cuipengyu.solitarysoulbook.activitys;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -16,8 +19,10 @@ import com.cuipengyu.solitarysoulbook.base.BaseActivity;
 import com.cuipengyu.solitarysoulbook.base.BaseReadView;
 import com.cuipengyu.solitarysoulbook.base.OnReadStateChangeListener;
 import com.cuipengyu.solitarysoulbook.base.OnViewClickListener;
+import com.cuipengyu.solitarysoulbook.entity.Constants;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterBody;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
+import com.cuipengyu.solitarysoulbook.entity.bean.EvenBusEntityBook;
 import com.cuipengyu.solitarysoulbook.entity.bean.UserShelfBean;
 import com.cuipengyu.solitarysoulbook.mvp.controller.ReadActivityController;
 import com.cuipengyu.solitarysoulbook.mvp.presenter.ReadActivityPresenter;
@@ -32,7 +37,13 @@ import com.cuipengyu.solitarysoulbook.widget.BindViewHolder;
 import com.cuipengyu.solitarysoulbook.widget.CustomDialog;
 import com.cuipengyu.solitarysoulbook.widget.PageWidget;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class ReadActivity extends BaseActivity implements ReadActivityController.ReadView, View.OnClickListener {
+    //使用onActivityResult通知书架更新
+    public FragmentTransaction mFragmentTransaction;
+    public FragmentManager fragmentManager;
+    public String curFragmentTag = "mShelfFragment";
     private ReadActivityController.ReadPresenter mReadActivityPresenter;
     private String bookID;
     private int currentChapter = 1;
@@ -52,7 +63,7 @@ public class ReadActivity extends BaseActivity implements ReadActivityController
     private int mType = 0;
     private String bookName;
     private String bookImage;
-    private    CustomDialog customDialog=null;
+    private CustomDialog customDialog = null;
 
     @Override
     public int bindViewLayout() {
@@ -152,7 +163,10 @@ public class ReadActivity extends BaseActivity implements ReadActivityController
                     public void onViewClick(BindViewHolder viewHolder, View view, CustomDialog tDialog) {
                         switch (view.getId()) {
                             case R.id.read_dialog_yes:
-                                DbUtils.getSession().getUserShelfBeanDao().insert(new UserShelfBean(null, null, bookName, bookImage, bookID));
+                                if (bookName.equals("")) {
+                                    return;
+                                }
+                                DbUtils.getSession().getUserShelfBeanDao().insertOrReplace(new UserShelfBean(null, null, bookName, bookImage, bookID));
                                 customDialog.dismiss();
                                 finish();
                                 break;
@@ -242,6 +256,14 @@ public class ReadActivity extends BaseActivity implements ReadActivityController
         }
     }
 
+    //通过findFragmentByTag找到fragment发送标记
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+        Fragment f = fragmentManager.findFragmentByTag(curFragmentTag);
+        /*然后在碎片中调用重写的onActivityResult方法*/
+        f.onActivityResult(1, resultCode, data);
+    }
 
     private class ReadListener implements OnReadStateChangeListener {
 

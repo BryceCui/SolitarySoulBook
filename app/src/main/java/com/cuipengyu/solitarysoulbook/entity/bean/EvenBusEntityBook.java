@@ -15,6 +15,9 @@ public class EvenBusEntityBook {
     public EvenBusEntityBook(String bookName) {
         this.bookName = bookName;
     }
+    public EvenBusEntityBook( int type) {
+        this.type = type;
+    }
 
     public EvenBusEntityBook(String bookName, String bookUrl) {
         this.bookName = bookName;
