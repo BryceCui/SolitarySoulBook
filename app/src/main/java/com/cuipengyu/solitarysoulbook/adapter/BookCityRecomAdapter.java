@@ -48,7 +48,7 @@ public class BookCityRecomAdapter extends AdapterDelegate<BookCityBean> {
         holder.setText(R.id.bookrecom_book_author_tv, itmes.getRecommendBean().getBooks().get(p).getAuthor());
         holder.setText(R.id.bookrecom_book_lastChapter_tv, itmes.getRecommendBean().getBooks().get(p).getLastChapter());
         holder.setText(R.id.bookrecom_book_wordCount_tv, itmes.getRecommendBean().getBooks().get(p).getChaptersCount() + "");
-        holder.setImageGlide(R.id.book_city_recom_imag, Constants.IMG_BASE_URL + itmes.getRecommendBean().getBooks().get(p).getCover(), context);
+        holder.setImageGlide(R.id.book_city_recom_imag,  itmes.getRecommendBean().getBooks().get(p).getCover(), context);
         holder.setOnClickListener(R.id.book_city_layout_recom, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

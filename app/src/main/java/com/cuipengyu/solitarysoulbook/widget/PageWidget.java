@@ -1,3 +1,18 @@
+/**
+ * Copyright 2016 JustWayward Team
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.cuipengyu.solitarysoulbook.widget;
 
 import android.content.Context;
@@ -12,6 +27,7 @@ import android.graphics.PointF;
 import android.graphics.Region;
 import android.graphics.drawable.GradientDrawable;
 
+
 import com.cuipengyu.solitarysoulbook.base.BaseReadView;
 import com.cuipengyu.solitarysoulbook.base.OnReadStateChangeListener;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
@@ -20,14 +36,7 @@ import com.cuipengyu.solitarysoulbook.utils.ThemeManager;
 
 import java.util.List;
 
-/**
- * Create by    ： 崔鹏宇
- * Time  is     ： 2018/4/22
- * Email        ： cuipengyusoul@gmail.com
- * Github       ： https://github.com/SolitarySoul
- * Instructions ：
- */
-public class PageWidget extends BaseReadView{
+public class PageWidget extends BaseReadView {
 
     private int mCornerX = 1; // 拖拽点对应的页脚
     private int mCornerY = 1;
@@ -133,6 +142,7 @@ public class PageWidget extends BaseReadView{
         mBezierControl1.y = mCornerY;
         mBezierControl2.x = mCornerX;
         //mBezierControl2.y = mMiddleY - (mCornerX - mMiddleX) * (mCornerX - mMiddleX) / (mCornerY - mMiddleY);
+
         float f4 = mCornerY - mMiddleY;
         if (f4 == 0) {
             mBezierControl2.y = mMiddleY - (mCornerX - mMiddleX) * (mCornerX - mMiddleX) / 0.1f;
@@ -184,11 +194,11 @@ public class PageWidget extends BaseReadView{
         mBezierEnd1 = getCross(mTouch, mBezierControl1, mBezierStart1, mBezierStart2);
         mBezierEnd2 = getCross(mTouch, mBezierControl2, mBezierStart1, mBezierStart2);
 
-        /*
+		/*
          * mBeziervertex1.x 推导
-         * ((mBezierStart1.x+mBezierEnd1.x)/2+mBezierControl1.x)/2 化简等价于
-         * (mBezierStart1.x+ 2*mBezierControl1.x+mBezierEnd1.x) / 4
-         */
+		 * ((mBezierStart1.x+mBezierEnd1.x)/2+mBezierControl1.x)/2 化简等价于
+		 * (mBezierStart1.x+ 2*mBezierControl1.x+mBezierEnd1.x) / 4
+		 */
         mBeziervertex1.x = (mBezierStart1.x + 2 * mBezierControl1.x + mBezierEnd1.x) / 4;
         mBeziervertex1.y = (2 * mBezierControl1.y + mBezierStart1.y + mBezierEnd1.y) / 4;
         mBeziervertex2.x = (mBezierStart2.x + 2 * mBezierControl2.x + mBezierEnd2.x) / 4;
@@ -505,7 +515,7 @@ public class PageWidget extends BaseReadView{
         Bitmap bg = ThemeManager.getThemeDrawable(theme);
         if (bg != null) {
             pagefactory.setBgBitmap(bg);
-//            pagefactory.convertBetteryBitmap();
+            pagefactory.convertBetteryBitmap();
             if (isPrepared) {
                 pagefactory.onDraw(mCurrentPageCanvas);
                 pagefactory.onDraw(mNextPageCanvas);

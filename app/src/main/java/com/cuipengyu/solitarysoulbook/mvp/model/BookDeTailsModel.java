@@ -4,6 +4,7 @@ import android.support.annotation.MainThread;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsId;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.DefaultObserver;
 import com.cuipengyu.solitarysoulbook.entity.httphelper.RetrofitHelper;
@@ -25,22 +26,42 @@ import io.reactivex.schedulers.Schedulers;
 public class BookDeTailsModel implements BookDeTailsActivityController.BookDeTailsModel {
     @Override
     public void getBook(String bookName, final BaseHttpEntity<BookDetailsBean> httpEntity) {
-   RetrofitHelper.getService().getApi().getSearchBookPackage(bookName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<BookDetailsBean>() {
-       @Override
-       public void onSubscribe(Disposable d) {
+        RetrofitHelper.getService().getApi().getSearchBookPackage(bookName).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<BookDetailsBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-       }
+            }
 
-       @Override
-       public void onSuccess(BookDetailsBean bookDetailsBean) {
-         httpEntity.onSuccess(bookDetailsBean);
-       }
+            @Override
+            public void onSuccess(BookDetailsBean bookDetailsBean) {
+                httpEntity.onSuccess(bookDetailsBean);
+            }
 
-       @Override
-       public void onError(Throwable e) {
+            @Override
+            public void onError(Throwable e) {
 
-       }
-   });
+            }
+        });
 
+    }
+
+    @Override
+    public void getidBook(String id, final BaseHttpEntity<BookDetailsId> httpEntity) {
+        RetrofitHelper.getService().getApi().getBookDetailId(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<BookDetailsId>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(BookDetailsId bookDetailsId) {
+                httpEntity.onSuccess(bookDetailsId);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 }

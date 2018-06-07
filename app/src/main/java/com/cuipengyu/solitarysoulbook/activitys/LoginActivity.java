@@ -43,18 +43,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.check_login:
-                String username = username_et.getText().toString().trim();
-                String password = password_et.getText().toString().trim();
-                UserBean query = userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq(username), UserBeanDao.Properties.PassWord.eq(password)).unique();
-                if (query != null) {
-                    Constants.USER_NAME = username;
-                    Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                finish();
+//                String username = username_et.getText().toString().trim();
+//                String password = password_et.getText().toString().trim();
+//                UserBean query = userBeanDao.queryBuilder().where(UserBeanDao.Properties.Name.eq(username), UserBeanDao.Properties.PassWord.eq(password)).unique();
+//                if (query != null) {
+//                    Constants.USER_NAME = username;
+//                    Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(this, "用户名或者密码错误", Toast.LENGTH_SHORT).show();
+//                }
                 break;
             case R.id.login_to_register:
                 Intent intent = new Intent(this, RegisteredActivity.class);

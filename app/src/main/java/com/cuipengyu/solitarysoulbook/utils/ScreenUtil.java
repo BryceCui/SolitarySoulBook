@@ -36,4 +36,8 @@ public class ScreenUtil {
         final float scale = ApplicationContextUtil.getAppConnect().getResources().getDisplayMetrics().density;
         return (int) (px / scale + 0.5f);
     }
+    public static int dpToPxInt(float dp) {
+        return (int) (dpToPx(dp) + 0.5f);
+    }
+
 }

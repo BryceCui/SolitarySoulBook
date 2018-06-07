@@ -35,6 +35,7 @@ public class BookCitySpreadAdapter extends AdapterDelegate<BookCityBean> {
     @Override
     protected void onBindViewHolder(BookCityBean itmes, int position, BaseViewHolder holder) {
         List<String> url = new ArrayList<>();
+        if (itmes.getCitySpread() == null) return;
         int size = itmes.getCitySpread().getData().size();
         for (int i = 0; i < size; i++) {
             url.add(itmes.getCitySpread().getData().get(i).getImg());
@@ -44,6 +45,6 @@ public class BookCitySpreadAdapter extends AdapterDelegate<BookCityBean> {
 
     @Override
     protected int ItemCount(BookCityBean items) {
-        return items.getCitySpread()==null?0:1;
+        return items.getCitySpread() == null ? 0 : 1;
     }
 }

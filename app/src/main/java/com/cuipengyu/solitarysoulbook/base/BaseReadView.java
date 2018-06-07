@@ -65,10 +65,9 @@ public abstract class BaseReadView extends View {
         mNextPageCanvas = new Canvas(mNextPageBitmap);
         mScroller = new Scroller(getContext());
         //初始化工具类
-        pagefactory = new PageFactory(bookId, chaptersList);
+        pagefactory = new PageFactory(context,bookId, chaptersList);
         //设置监听
         pagefactory.setOnReadStateChangeListener(listener);
-
     }
 
     //初始化

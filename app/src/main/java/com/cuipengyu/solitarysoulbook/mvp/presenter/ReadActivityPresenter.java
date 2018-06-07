@@ -1,6 +1,7 @@
 package com.cuipengyu.solitarysoulbook.mvp.presenter;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
+import com.cuipengyu.solitarysoulbook.entity.bean.ChapterBody;
 import com.cuipengyu.solitarysoulbook.mvp.controller.ReadActivityController;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.mvp.model.ReadActivityModel;
@@ -43,6 +44,26 @@ public class ReadActivityPresenter implements ReadActivityController.ReadPresent
             }
         });
 
+    }
+
+    @Override
+    public void getChapterBodyData(String data, final int Chapter) {
+        mReadModel.getChapterBody(data, new BaseHttpEntity<ChapterBody>() {
+            @Override
+            public void onSuccess(ChapterBody data) {
+                mReadView.setChapterBody(data, Chapter);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
     }
 
     @Override

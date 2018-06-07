@@ -14,7 +14,6 @@ public class RetrofitHelper {
     private static String BASE_URL = "";
 
     private RetrofitHelper() {
-        BASE_URL = Constants.Api_baseUrl;
     }
     public static RetrofitHelper getService() {
         if (mHelper == null)   mHelper = new RetrofitHelper();
@@ -22,9 +21,9 @@ public class RetrofitHelper {
         return mHelper;
     }
 
-    public static RetrofitHelper getService(int index) {
+    public static RetrofitHelper getService(String index) {
         if (mHelper == null) mHelper = new RetrofitHelper();
-        BASE_URL = Constants.http_baseUrl;
+        BASE_URL = index;
         return mHelper;
     }
 

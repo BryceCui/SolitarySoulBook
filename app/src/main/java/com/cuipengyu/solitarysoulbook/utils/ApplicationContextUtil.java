@@ -31,6 +31,7 @@ public class ApplicationContextUtil extends Application {
         super.onCreate();
         mApplicationContext = this;
         DbUtils.initDb();
+        SharedPreferencesUtil.init(this, getPackageName() + "_preference", Context.MODE_MULTI_PROCESS);
         //facebook在游览器中查看本地数据库的框架注册
         Stetho.initializeWithDefaults(this);
         if (LeakCanary.isInAnalyzerProcess(this)) {

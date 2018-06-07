@@ -5,8 +5,12 @@ import com.cuipengyu.solitarysoulbook.entity.bean.AutomaticBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCityRecommendBean;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCitySpread;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsId;
+import com.cuipengyu.solitarysoulbook.entity.bean.ChapterBody;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 import com.cuipengyu.solitarysoulbook.entity.bean.HotWord;
+import com.cuipengyu.solitarysoulbook.entity.bean.RankingAllBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.RankingBookBean;
 
 import java.util.Map;
 
@@ -40,7 +44,7 @@ public interface RetrofitService {
      * @return
      */
     @GET("mix-atoc/{bookId}")
-    Observable<ChapterLink> getChapterList(@Path("bookId") String bookId);
+    Single<ChapterLink> getChapterList(@Path("bookId") String bookId);
 
     /**
      * 小说搜索推荐
@@ -48,7 +52,7 @@ public interface RetrofitService {
      * @return
      */
     @GET("book/hot-word")
-    Observable<HotWord> getHotWord();
+    Single<HotWord> getHotWord();
 
     /**
      * 小说搜索关键字自动补全
@@ -66,13 +70,33 @@ public interface RetrofitService {
     Single<BookDetailsBean> getSearchBookPackage(@Query("query") String query);
 
     @GET("spread")
-    Observable<BookCitySpread> getSpread();
+    Single<BookCitySpread> getSpread();
 
     /**
      * 推荐书籍
      * @return
      */
     @GET("/book/recommend")
-    Observable<BookCityRecommendBean> getRecommendBookPackage();
+    Single<BookCityRecommendBean> getRecommendBookPackage();
+    @GET()
+    Single<ChapterBody> getChapterBody(@Url String url);
+
+    /**
+     * 获取所有排行榜
+     *
+     * @return
+     */
+    @GET("/ranking/gender")
+    Single<RankingAllBean> getRankingAll();
+    @GET("/ranking/{rankingId}")
+    Single<RankingBookBean> getRankingBook(@Path("rankingId") String rankingId);
+    /**
+     * 书籍详情
+     * @param bookId
+     * @return
+     */
+    @GET("/book/{bookId}")
+    Single<BookDetailsId> getBookDetailId(@Path("bookId") String bookId);
+
 
 }

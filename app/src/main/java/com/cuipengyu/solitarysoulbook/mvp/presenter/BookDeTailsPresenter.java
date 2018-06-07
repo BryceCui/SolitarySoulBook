@@ -2,6 +2,7 @@ package com.cuipengyu.solitarysoulbook.mvp.presenter;
 
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.BookDetailsId;
 import com.cuipengyu.solitarysoulbook.mvp.controller.BookDeTailsActivityController;
 import com.cuipengyu.solitarysoulbook.mvp.model.BookDeTailsModel;
 
@@ -28,6 +29,26 @@ public class BookDeTailsPresenter implements BookDeTailsActivityController.BookD
             @Override
             public void onSuccess(BookDetailsBean data) {
                 mView.setBookData(data);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+    @Override
+    public void setidBook(String ID) {
+        model.getidBook(ID, new BaseHttpEntity<BookDetailsId>() {
+            @Override
+            public void onSuccess(BookDetailsId data) {
+                mView.setidBook(data);
             }
 
             @Override

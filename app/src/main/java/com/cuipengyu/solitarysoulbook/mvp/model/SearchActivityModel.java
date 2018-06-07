@@ -23,21 +23,20 @@ public class SearchActivityModel implements SearchActivityController.searchModel
 
     @Override
     public void getHotWord(final BaseHttpEntity<HotWord> httpEntity) {
-        RetrofitHelper.getService().getApi().getHotWord().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new DefaultObserver<HotWord>() {
+        RetrofitHelper.getService().getApi().getHotWord().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new SingleObserver<HotWord>() {
             @Override
-            public void onError(String error) {
-                httpEntity.onError(error);
-            }
-
-            @Override
-            public void onSuccess(HotWord data) {
-                httpEntity.onSuccess(data);
+            public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onFinish() {
-                httpEntity.onFinish();
+            public void onSuccess(HotWord hotWord) {
+                httpEntity.onSuccess(hotWord);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
             }
         });
     }

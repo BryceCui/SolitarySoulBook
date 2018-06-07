@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:id="@+id/book_ranking_layout_recom">
+
+    <ImageView
+        android:id="@+id/book_ranking_recom_imag"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:background="@drawable/shap_radius_5_bg"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/bookranking_bookName_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/book_ranking_recom_imag"
+        android:text="书名："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookranking_bookName_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/bookranking_bookName_tv_1"
+        android:text="标题"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/bookranking_bookCat_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookranking_bookName_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_ranking_recom_imag"
+        android:text="类型："
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bookranking_bookCat_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookranking_bookName_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookranking_bookCat_tv_1"
+        android:text="类型" />
+
+    <TextView
+        android:id="@+id/bookranking_book_author_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookranking_bookCat_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/book_ranking_recom_imag"
+        android:text="作者："
+        android:textColor="@color/red" />
+    <TextView
+        android:id="@+id/bookranking_book_author_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookranking_bookCat_tv"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bookranking_book_author_tv_1"
+        android:text="作者" />
+</RelativeLayout>

@@ -150,6 +150,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }
+        if (entityBook.getType() == 2) {
+            if (entityBook.getBookName().equals("分类")) {
+
+            } else if (entityBook.getBookName().equals("排行")) {
+                Intent intent = new Intent(this, RankingActivity.class);
+                startActivity(intent);
+            } else {
+
+            }
+        }
     }
 
 

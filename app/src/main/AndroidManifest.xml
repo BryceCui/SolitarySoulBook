@@ -25,7 +25,9 @@
         <activity android:name=".activitys.ReadActivity" />
         <activity android:name=".activitys.SearchViewActivity" />
         <activity android:name=".activitys.RegisteredActivity" />
-        <activity android:name=".activitys.BookDetailsActivity"></activity>
+        <activity android:name=".activitys.BookDetailsActivity" />
+        <activity android:name=".activitys.RankingActivity" />
+        <activity android:name=".activitys.FeaturedActivity"></activity>
     </application>
 
 </manifest>

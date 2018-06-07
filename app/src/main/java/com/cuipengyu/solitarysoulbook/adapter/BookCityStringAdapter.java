@@ -8,6 +8,9 @@ import com.cuipengyu.solitarysoulbook.R;
 import com.cuipengyu.solitarysoulbook.base.AdapterDelegate;
 import com.cuipengyu.solitarysoulbook.base.BaseViewHolder;
 import com.cuipengyu.solitarysoulbook.entity.bean.BookCityBean;
+import com.cuipengyu.solitarysoulbook.entity.bean.EvenBusEntityBook;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Create by    ： 崔鹏宇
@@ -28,12 +31,12 @@ public class BookCityStringAdapter extends AdapterDelegate<BookCityBean> {
     }
 
     @Override
-    protected void onBindViewHolder(BookCityBean itmes, int position, BaseViewHolder holder) {
-        holder.setText(R.id.book_city_string_tv, itmes.getStrings().get(position-1));
+    protected void onBindViewHolder(final BookCityBean itmes, final int position, BaseViewHolder holder) {
+        holder.setText(R.id.book_city_string_tv, itmes.getStrings().get(position - 1));
         holder.setOnClickListener(R.id.book_city_string_tv, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EventBus.getDefault().post(new EvenBusEntityBook(itmes.getStrings().get(position - 1),2));
             }
         });
     }

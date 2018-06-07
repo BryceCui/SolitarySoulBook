@@ -3,6 +3,7 @@ package com.cuipengyu.solitarysoulbook.mvp.controller;
 import com.cuipengyu.solitarysoulbook.base.BaseHttpEntity;
 import com.cuipengyu.solitarysoulbook.base.BasePresenter;
 import com.cuipengyu.solitarysoulbook.base.BaseView;
+import com.cuipengyu.solitarysoulbook.entity.bean.ChapterBody;
 import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 
 /**
@@ -15,14 +16,19 @@ import com.cuipengyu.solitarysoulbook.entity.bean.ChapterLink;
 public class ReadActivityController {
     public interface ReadPresenter extends BasePresenter {
         void getChapterListData(String booid);
+
+        void getChapterBodyData(String data, int Chapter);
     }
 
     public interface ReadModel {
         void getChapterListData(String bookid, BaseHttpEntity<ChapterLink> entity);
-        void getChapterBody(String chapterLink, BaseHttpEntity entity);
+
+        void getChapterBody(String chapterLink, BaseHttpEntity<ChapterBody> entity);
     }
 
     public interface ReadView extends BaseView<ReadPresenter> {
         void setChapterListData(ChapterLink ChapterLink);
+
+        void setChapterBody(ChapterBody chapterBody,int cha);
     }
 }

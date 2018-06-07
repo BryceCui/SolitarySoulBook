@@ -76,7 +76,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public BaseViewHolder setImageGlide(@IdRes int viewId, String Url, Context context) {
         ImageView view = getView(viewId);
-        Glide.with(context).load(Url).into(view);
+        Glide.with(context).load(Constants.IMG_BASE_URL +Url).into(view);
         return this;
     }
     public BaseViewHolder setImageBanner( List<String> iamge) {
